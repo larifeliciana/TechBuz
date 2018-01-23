@@ -19,7 +19,7 @@ public class Empresa {
 		this.nome = nome1;
 		this.razao_social = razao_social1;
 		this.email = email1;
-		this.tipo = tipo
+		this.tipo = tipo;
 	}
 	
 	public String toString()

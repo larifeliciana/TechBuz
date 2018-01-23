@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import Interfaces.IRepositorioEmpresa;
 import Interfaces.IRepositorioFuncionario;
+import beans.Contrato;
 //import com.mysql.jdbc.*;
 import beans.Empresa;
+import beans.Endereco;
 
 public class RepositorioEmpresa implements IRepositorioEmpresa {
 	
@@ -29,7 +31,6 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 	{
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
 		}
 		catch(Exception e)
 		{
@@ -37,29 +38,38 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		}
 	}
 	
-	public boolean cadastrarEmpresaBD(Empresa a, int opcode)
+	public boolean cadastrarEmpresaBD(Empresa a,Endereco b, int opcode)
 	{
 		//1 fornecedor
 		//2 matriz empresa
 		//3 oficina
 		//4 todos
 		try{
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
 			
-			String query = "insert into empresa(cnpj, nome, email, razao_social, tipo) values(?,?)";
+			String query = "call inserirEmpresa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);";
 			PreparedStatement stmt = con.prepareStatement(query);
 			
 			stmt.setString(1, a.getCnpj());
 			stmt.setString(2, a.getNome());
 			stmt.setString(3, a.getEmail());
 			stmt.setString(4, a.getRazao_social());
-			stmt.setString(5, a.getTipo());
+			stmt.setString(5, b.getCep());
+			stmt.setString(6,b.getNumero());
+			stmt.setString(7, b.getRua());
+			stmt.setString(8, b.getBairro());
+			stmt.setString(9, b.getCidade());
+			stmt.setString(10, b.getEstado());
+			stmt.setString(11, b.getComplemento());
+			stmt.setString(12, b.getEmpresa_cnpj());
+			stmt.setInt(13, opcode);
 			
 			stmt.executeUpdate();
 			stmt.close(); 
 			con.close();
 			}
 			catch(Exception e) {
-				System.out.println("nao deu certo");
+				System.out.println("nao deu certo inserir empresa");
 				return false;
 			}
 			
@@ -72,41 +82,18 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		Empresa a = new Empresa();
 		try{
 			
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+			
 		
 			String query = "";
 			
-			switch(opcode)
-			{
 			
-			case 1:
-
-				 query = "select * from fornecedor where cnpj = ?";
-			break;
+				 query = "call buscarEmpresa(?, ?)";
 			
-			case 2:
-
-				 query = "select * from matriz_empresa where cnpj = ?";
-				
-			break;
-			
-			case 3:
-
-				 query = "select * from oficina where cnpj = ?";
-				
-			break;
-			
-			case 4:
-
-				 query = "select * from empresa where cnpj = ?";
-				
-			break;
-			}
-			
-			
-			//try codigo errado
 			PreparedStatement stmt = con.prepareStatement(query);
 			
 			stmt.setString(1, cnpj);
+			stmt.setInt(2, opcode);
 			
 			ResultSet resultado  = stmt.executeQuery();
 			
@@ -131,25 +118,26 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 	}
 	
-	public boolean removerEmpresaBD(String cnpj)
+	public boolean removerEmpresaBD(String cnpj, int opcode)
 	{
 		
 
 		try{
 		
-		
-		String query = "delete from empresa where cnpj = ?";
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+			
+		String query = "call removerEmpresa(?, ?)";
 		PreparedStatement stmt = con.prepareStatement(query);
 		
 		stmt.setString(1, cnpj);
-		
+		stmt.setInt(2, opcode);
 		
 		stmt.executeUpdate();
 		stmt.close(); 
 		con.close();
 		}
 		catch(Exception e) {
-			System.out.println("nao deu certo");
+			System.out.println("nao deu certo remover");
 			return false;
 		}
 		
@@ -163,34 +151,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		ArrayList empresas = new ArrayList<Empresa>();
 		
 		try {
-			String query = "";
-			
-			switch(opcode)
-			{
-			
-			case 1:
-
-				 query = "select * from fornecedor";
-			break;
-			
-			case 2:
-
-				 query = "select * from matriz_empresa";
-				
-			break;
-			
-			case 3:
-
-				 query = "select * from oficina ";
-				
-			break;
-			
-			case 4:
-
-				 query = "select * from empresa";
-				
-			break;
-			}
+			String query = "call listarEmpresas(?);";
 			PreparedStatement stmt = con.prepareStatement(query);
 			
 			ResultSet resultado = stmt.executeQuery();
@@ -225,20 +186,63 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 	}
 	
-	public boolean cadastrarContrato()
+	public boolean cadastrarContrato(Contrato a)
 	{
-		
+		try
+		{
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+			
+			
+			String query = "call inserirContrato(?,?,?,?,?, ?);";
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			stmt.setString(2, a.getOficina_cnpj());
+			stmt.setString(1, a.getMatriz_empresa_cnpj());
+			stmt.setDate(3, a.getDt_inicio());
+			stmt.setDate(4, a.getDt_fim());
+			stmt.setFloat(5, a.getVl_contrato());
+			
+
+			stmt.executeUpdate();
+			stmt.close(); 
+			con.close();
+			
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 
-	public boolean alterarContrato()
+	//public boolean alterarContrato()
 	{
 		
 	}
 	
-	public boolean excluirContrato()
+	public boolean excluirContrato(String matriz_empresa_cnpj, String oficina_cnpj)
 	
 	{
+		try{
+			
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+			
+		String query = "call removerContrato(?, ?)";
+		PreparedStatement stmt = con.prepareStatement(query);
 		
+		stmt.setString(1, matriz_empresa_cnpj);
+		stmt.setString(2, oficina_cnpj);
+		
+		stmt.executeUpdate();
+		stmt.close(); 
+		con.close();
+		}
+		catch(Exception e) {
+			System.out.println("nao deu certo removerContrato");
+			return false;
+		}
+		
+		return true;
 	}
 	
 

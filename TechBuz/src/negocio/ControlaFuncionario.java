@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Interfaces.IRepositorioFuncionario;
 import Repositorio.RepositorioFuncionario;
+import beans.Endereco;
 import beans.Funcionario;
 
 public class ControlaFuncionario {
@@ -16,49 +17,199 @@ public class ControlaFuncionario {
 	}
 	
 	
-	public boolean cadastrarFuncionario(Funcionario a)
+	public String cadastrarFuncionarioMotorista(Funcionario a, Endereco b, String cnh)
 	{
-		return funcionarios.cadastrarFuncionarioBD(a);		
+		return funcionarios.cadastrarFuncionarioBD(a, b,1, cnh);
 	
 	}
 	
-	public boolean removerFuncionario(String cpf)
+	public String cadastrarFuncionarioCobrador(Funcionario a, Endereco b)
+	{
+		return funcionarios.cadastrarFuncionarioBD(a, b, 2, null);
+	
+	}
+	
+	public String cadastrarFuncionarioFiscal(Funcionario a, Endereco b)
+	{
+		return funcionarios.cadastrarFuncionarioBD(a, b,3 , null);
+	
+	}
+	
+	public String cadastrarFuncionarioGerente(Funcionario a, Endereco b)
+	{
+		return funcionarios.cadastrarFuncionarioBD(a, b, 4, null);
+	
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////
+	public boolean removerFuncionarioMotorista(String cpf)
 	{
 		
-		return funcionarios.removerFuncionarioBD(cpf);
+		return funcionarios.removerFuncionarioBD(cpf, 1);
 	}
 	
-	public Funcionario buscarFuncionario(String cpf)
+	public boolean removerFuncionarioCobrador(String cpf)
 	{
-		return funcionarios.buscaFuncionarioBD(cpf);
+		
+		return funcionarios.removerFuncionarioBD(cpf, 2);
 	}
 	
-	public ArrayList<Funcionario> retornarAtivos()
+	public boolean removerFuncionarioFiscal(String cpf)
 	{
-		return funcionarios.todosFuncionariosBD(1);
+		
+		return funcionarios.removerFuncionarioBD(cpf, 3);
 	}
 	
-	public ArrayList<Funcionario> retornaInativos()
+	public boolean removerFuncionarioGerente(String cpf)
 	{
-		return funcionarios.todosFuncionariosBD(2);
+		
+		return funcionarios.removerFuncionarioBD(cpf, 4);
+	}
+	////////////////////////////////////////////////////////////////
+	
+public Funcionario buscarFuncionario(String cpf)
+	
+	{
+		return funcionarios.buscaFuncionarioBD(cpf, 0);
 	}
 	
-	public ArrayList<Funcionario> retornaDisponiveis()
+	public Funcionario buscarFuncionarioMotorista(String cpf)
+	
 	{
-		return funcionarios.todosFuncionariosBD(3);
+		return funcionarios.buscaFuncionarioBD(cpf, 1);
 	}
 	
-	public ArrayList<Funcionario> retornaAfastados()
+	public Funcionario buscarFuncionarioCobrador(String cpf)
 	{
-		return funcionarios.todosFuncionariosBD(4);
+		return funcionarios.buscaFuncionarioBD(cpf, 2);
+	}
+	
+	public Funcionario buscarFuncionarioFiscal(String cpf)
+	{
+		return funcionarios.buscaFuncionarioBD(cpf, 3);
+	}
+	
+	public Funcionario buscarFuncionarioGerente(String cpf)
+	{
+		return funcionarios.buscaFuncionarioBD(cpf, 4);
+	}
+///////////////////////////////////////////////////////////////
+public ArrayList<Funcionario> buscarFuncionarioNome(String nome)
+	
+	{
+		return funcionarios.buscaFuncionarioNomeBD(nome, 0);
+	}
+	
+	public ArrayList<Funcionario> buscarFuncionarioMotoristaNome(String nome)
+	
+	{
+		return funcionarios.buscaFuncionarioNomeBD(nome, 1);
+	}
+	
+	public ArrayList<Funcionario> buscarFuncionarioCobradorNome(String nome)
+	{
+		return funcionarios.buscaFuncionarioNomeBD(nome, 2);
+	}
+	
+	public ArrayList<Funcionario> buscarFuncionarioFiscalNome(String nome)
+	{
+		return funcionarios.buscaFuncionarioNomeBD(nome, 3);
+	}
+	
+	public ArrayList<Funcionario> buscarFuncionarioGerenteNome(String nome)
+	{
+		return funcionarios.buscaFuncionarioNomeBD(nome, 4);
 	}
 
-	public boolean checarDisponibilidade(String cpf)
-	
+	////////////////////////////////////////////////////////////////
+	public ArrayList<Funcionario> retornarAtivos()
 	{
-		if (funcionarios.buscaFuncionarioBD(cpf).getDisponibilidade() == 'S')
+		return funcionarios.todosFuncionariosAtivosBD(0);
+	}
+	
+	public ArrayList<Funcionario> retornarAtivosMotorista()
+	{
+		return funcionarios.todosFuncionariosAtivosBD(1);
+	}
+	
+	public ArrayList<Funcionario> retornarAtivosCobrador()
+	{
+		return funcionarios.todosFuncionariosAtivosBD(2);
+	}
+	
+	public ArrayList<Funcionario> retornarAtivosFiscal()
+	{
+		return funcionarios.todosFuncionariosAtivosBD(3);
+	}
+	
+	public ArrayList<Funcionario> retornarAtivosGerente()
+	{
+		return funcionarios.todosFuncionariosAtivosBD(4);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	
+	public ArrayList<Funcionario> retornaInativosMotorista()
+	{
+		return funcionarios.todosFuncionariosInativosBD(1);
+	}
+	
+	public ArrayList<Funcionario> retornaInativosCobrador()
+	{
+		return funcionarios.todosFuncionariosInativosBD(2);
+	}
+	
+	public ArrayList<Funcionario> retornaInativosFiscal()
+	{
+		return funcionarios.todosFuncionariosInativosBD(3);
+	}
+	
+	public ArrayList<Funcionario> retornaInativosGerente()
+	{
+		return funcionarios.todosFuncionariosInativosBD(4);
+	}
+	////////////////////////////////////////////////////////////
+	public ArrayList<Funcionario> retornaDisponiveisMotorista()
+	{
+		return funcionarios.todosFuncionariosDisponiveisBD(1);
+	}
+	
+	public ArrayList<Funcionario> retornaDisponiveisCobrador()
+	{
+		return funcionarios.todosFuncionariosDisponiveisBD(2);
+	}
+	public ArrayList<Funcionario> retornaDisponiveisFiscal()
+	{
+		return funcionarios.todosFuncionariosDisponiveisBD(3);
+	}
+	public ArrayList<Funcionario> retornaDisponiveisGerente()
+	{
+		return funcionarios.todosFuncionariosDisponiveisBD(4);
+	}/////////////////////////////////////////////////////////////////////
+	
+	
+	public boolean checarDisponibilidadeMotorista(String cpf)
+	{
+		if (funcionarios.buscaFuncionarioBD(cpf,1).getDisponibilidade().equals( "S"))
 			return true;
-		
+		return false;
+	}
+	public boolean checarDisponibilidadeCobrador(String cpf)
+	{
+		if (funcionarios.buscaFuncionarioBD(cpf, 2).getDisponibilidade().equals( "S"))
+			return true;
+		return false;
+	}
+	public boolean checarDisponibilidadeFiscal(String cpf)
+	{
+		if (funcionarios.buscaFuncionarioBD(cpf , 3).getDisponibilidade().equals( "S"))
+			return true;
+		return false;
+	}
+	public boolean checarDisponibilidadeGerente(String cpf)
+	{
+		if (funcionarios.buscaFuncionarioBD(cpf, 4).getDisponibilidade().equals( "S"))
+			return true;
 		return false;
 	}
 

@@ -1,0 +1,69 @@
+
+.telaToda{
+
+	-fx-background-color: #F5F5F5;
+}
+
+.botaoEmpresa
+{
+	
+	
+	-fx-border-width:5px;
+
+	
+	 -fx-background-insets: 0,4,4;
+
+	
+}
+
+.botao
+
+{
+
+    -fx-background-color: 
+        transparent,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+
+}
+.botoes
+{
+	-fx-border-style: none;
+}
+.textoCadastro
+{
+	-fx-font-size :20px;
+	-fx-font-family:"Lucida Console";
+}
+.textoEmpresa
+{
+	-fx-font-size :20px;
+	-fx-font-family:"Lucida Console";
+	-fx-border-top-color:black;
+}
+
+.titulo
+
+{
+	-fx-font-size :30px;
+	-fx-font-family:"Lucida Console";
+	-fx-border-top-color:black;	
+}
+
+.subtitulo
+{
+	-fx-font-size :20px;
+	-fx-font-family:"Lucida Console";
+	-fx-border-top-color:black;
+}
+
+.corpo
+{
+	-fx-font-size:15px;
+	-fx-font-family:"Lucida Console";
+	-fx-border-top-color:black;	
+}

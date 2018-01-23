@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="550.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="1.0" layoutY="2.0" prefHeight="650.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Ocorrências">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="nome" layoutX="46.0" layoutY="43.0" styleClass="titulo" stylesheets="@teste.css" text="Funcionario Nome" />
+                        <Label fx:id="cpf" layoutX="46.0" layoutY="104.0" styleClass="corpo" text="702.839.194.93" />
+                        <ImageView fx:id="foto" fitHeight="150.0" fitWidth="138.0" layoutX="376.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" />
+                        <TableView fx:id="tabelaOcorrencias" layoutX="37.0" layoutY="192.0" prefHeight="200.0" prefWidth="477.0">
+                          <columns>
+                            <TableColumn fx:id="colunaData" prefWidth="106.0" text="Data" />
+                            <TableColumn fx:id="colunaStatus" prefWidth="111.0" text="Status" />
+                              <TableColumn fx:id="colunaDescricao" prefWidth="259.0" text="Descrição" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="botaoAlterar" layoutX="37.0" layoutY="143.0" mnemonicParsing="false" styleClass="botao" text="Alterar" />
+                        <Button fx:id="botaoRemover" layoutX="110.0" layoutY="143.0" mnemonicParsing="false" styleClass="botao" text="Remover" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Cadastrar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="430.0">
+                     <children>
+                        <Label layoutX="8.0" layoutY="22.0" styleClass="subtitulo" text="Nova Ocorrência:" />
+                        <Label layoutX="39.0" layoutY="65.0" styleClass="corpo" text="Data:" />
+                        <DatePicker fx:id="data" layoutX="39.0" layoutY="98.0" />
+                        <Label layoutX="40.0" layoutY="237.0" styleClass="corpo" text="Status:" />
+                        <ChoiceBox fx:id="status" layoutX="38.0" layoutY="264.0" prefHeight="25.0" prefWidth="176.0" />
+                        <Label layoutX="40.0" layoutY="324.0" styleClass="corpo" text="Descrição:" />
+                        <ChoiceBox fx:id="tipo" layoutX="39.0" layoutY="182.0" prefHeight="25.0" prefWidth="174.0" />
+                        <TextArea fx:id="descricao" layoutX="41.0" layoutY="364.0" prefHeight="148.0" prefWidth="490.0" />
+                        <Label layoutX="39.0" layoutY="155.0" styleClass="corpo" text="Tipo:" />
+                        <Button layoutX="325.0" layoutY="538.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="166.0" styleClass="botao" text="Inserir " />
+                        <Label layoutX="275.0" layoutY="65.0" styleClass="corpo" text="Justificativa:" />
+                        <TextArea fx:id="justificativa" layoutX="272.0" layoutY="103.0" prefHeight="121.0" prefWidth="247.0" />
+                        <Label layoutX="272.0" layoutY="256.0" styleClass="corpo" text="Horário:" />
+                        <TextField fx:id="horario" layoutX="271.0" layoutY="277.0" prefHeight="25.0" prefWidth="146.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
