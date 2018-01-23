@@ -214,7 +214,9 @@ public class FuncionariosController {
 
 	public void remover()
 	{
-		
+		 Funcionario novo =  (Funcionario) tabela.getSelectionModel().getSelectedItem();
+		 ControlaFuncionario funcionarios = new ControlaFuncionario();
+		// funcionarios.rem
 	}
 	
 	public void alterar()
