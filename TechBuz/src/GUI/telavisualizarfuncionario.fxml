@@ -8,93 +8,101 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1270.0" styleClass="titulo" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane layoutX="319.0" layoutY="128.0" prefHeight="748.0" prefWidth="760.0">
+<SplitPane dividerPositions="0.27917981072555204" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="1270.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="GUI.VisualizarFuncionarioController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="599.0" prefWidth="200.0" styleClass="titulo" stylesheets="@teste.css">
          <children>
-            <ImageView fitHeight="224.0" fitWidth="169.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 4px;">
+            <ImageView fx:id="foto" fitHeight="297.0" fitWidth="216.0" layoutX="69.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../jose%20fino.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="202.0" layoutY="37.0" text="NOME:" />
-            <Label fx:id="nome" layoutX="342.0" layoutY="37.0" prefHeight="33.0" prefWidth="390.0" styleClass="titulo" text="Jose Fino" />
-            <Label layoutX="202.0" layoutY="97.0" text="CPF:" />
-            <Label layoutX="342.0" layoutY="97.0" text="702.839.194.93" />
-            <Label layoutX="205.0" layoutY="195.0" text="Cargo:" />
-            <Label layoutX="342.0" layoutY="195.0" text="Motorista" />
-            <Label layoutX="204.0" layoutY="151.0" text="RG:" />
-            <Label layoutX="342.0" layoutY="151.0" text="6.368.459" />
-            <Label layoutX="14.0" layoutY="284.0" text="E-mail:" />
-            <Label layoutX="174.0" layoutY="284.0" prefHeight="33.0" prefWidth="494.0" text="jose@gmail.com" />
-            <Label layoutX="14.0" layoutY="341.0" text="Celular:" />
-            <Label layoutX="186.0" layoutY="341.0" text="81998853081" />
-            <Label layoutX="499.0" layoutY="284.0" text="Ativo:" />
-            <Label layoutX="640.0" layoutY="284.0" text="SIM" />
-            <Label layoutX="411.0" layoutY="338.0" text="Disponível:" />
-            <Label layoutX="641.0" layoutY="336.0" text="SIM" />
-            <Label layoutX="14.0" layoutY="401.0" text="Telefone:" />
-            <Label layoutX="186.0" layoutY="401.0" text="8134448000" />
-            <Label layoutX="569.0" layoutY="394.0" text="19/10/1986" />
-            <Label layoutX="400.0" layoutY="394.0" text="Admissão:" />
-            <SplitPane layoutY="446.0" prefHeight="302.0" prefWidth="760.0">
+            <Label fx:id="cargo" layoutX="124.0" layoutY="354.0" styleClass="titulo" stylesheets="@teste.css" text="Cargo" />
+            <Label fx:id="ativo" layoutX="129.0" layoutY="413.0" text="Ativo" />
+            <Label fx:id="disponibilidade" layoutX="93.0" layoutY="468.0" text="Disponível" />
+            <Label fx:id="data_admissao" layoutX="93.0" layoutY="521.0" text="17/10/1997" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="subtitulo" stylesheets="@teste.css">
+         <children>
+            <MenuBar fx:id="menu" layoutX="-8.0" prefHeight="64.0" prefWidth="1086.0" styleClass="subtitulo">
+               <menus>
+                  <Menu fx:id="menuOcorrencia" mnemonicParsing="false" text="Ocorrência">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Adicionar" />
+                        <MenuItem mnemonicParsing="false" text="Alterar" />
+                        <MenuItem mnemonicParsing="false" text="Remover" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menuAfastamento" mnemonicParsing="false" text="Afastamento">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Visualizar" />
+                        <MenuItem mnemonicParsing="false" text="Adicionar" />
+                        <MenuItem mnemonicParsing="false" text="Alterar" />
+                        <MenuItem mnemonicParsing="false" text="Remover" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menuBancoHoras" mnemonicParsing="false" text="Banco de horas">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Ponto Diário" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menuTreinamento" mnemonicParsing="false" text="Treinamento">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Visualizar" />
+                        <MenuItem mnemonicParsing="false" text="Adicionar" />
+                        <MenuItem mnemonicParsing="false" text="Alterar" />
+                        <MenuItem mnemonicParsing="false" text="Remover" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+            <Label layoutX="29.0" layoutY="238.0" text="Celular:" />
+            <SplitPane dividerPositions="0.379182156133829, 0.4052044609665427" layoutX="2.0" layoutY="61.0" orientation="VERTICAL" prefHeight="540.0" prefWidth="911.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="758.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="817.0">
                      <children>
-                        <Label layoutX="23.0" layoutY="30.0" text="Rua:" />
-                        <Label layoutX="114.0" layoutY="30.0" text="Rua Almir Azevedo" />
-                        <Label layoutX="589.0" layoutY="127.0" text="Nº:" />
-                        <Label layoutX="660.0" layoutY="127.0" text="800" />
-                        <Label layoutX="23.0" layoutY="87.0" text="Bairro:" />
-                        <Label layoutX="160.0" layoutY="86.0" text="Várzea" />
-                        <Label layoutX="23.0" layoutY="136.0" text="CEP:" />
-                        <Label layoutX="23.0" layoutY="195.0" text="Cidade:" />
-                        <Label layoutX="120.0" layoutY="136.0" text="53200-270" />
-                        <Label layoutX="325.0" layoutY="133.0" text="Estado:" />
-                        <Label layoutX="465.0" layoutY="130.0" text="PE" />
-                        <Label layoutX="185.0" layoutY="195.0" text="Recife" />
-                        <Label layoutX="23.0" layoutY="251.0" text="Complemento:" />
-                        <Label layoutX="256.0" layoutY="251.0" text="Label" />
+                        <Label layoutX="15.0" layoutY="22.0" text="Nome:" />
+                        <Label fx:id="nome" layoutX="142.0" layoutY="22.0" text="José Fino" />
+                        <Label layoutX="14.0" layoutY="58.0" text="CPF:" />
+                        <Label fx:id="cpf" layoutX="143.0" layoutY="58.0" text="70283919493" />
+                        <Label layoutX="368.0" layoutY="54.0" text="RG:" />
+                        <Label fx:id="telefone" layoutX="555.0" layoutY="136.0" text="Label" />
+                        <Label layoutX="15.0" layoutY="99.0" text="E-mail:" />
+                        <Label fx:id="email" layoutX="142.0" layoutY="96.0" text="jose@gmail.com" />
+                        <Label layoutX="601.0" layoutY="51.0" text="Nascimento:" />
+                        <Label fx:id="celular" layoutX="148.0" layoutY="141.0" text="Label" />
+                        <Label layoutX="15.0" layoutY="141.0" text="Celular:" />
+                        <Label layoutX="399.0" layoutY="136.0" text="Telefone:" />
+                        <Label fx:id="rg" layoutX="429.0" layoutY="53.0" text="Label" />
+                        <Label fx:id="nascimento" layoutX="786.0" layoutY="51.0" text="Label" />
                      </children>
                   </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                  <SplitPane prefHeight="302.0" prefWidth="760.0" styleClass="subtitulo">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="758.0">
+                           <children>
+                              <Label layoutX="23.0" layoutY="30.0" text="Rua:" />
+                              <Label fx:id="rua" layoutX="159.0" layoutY="30.0" text="Rua Almir Azevedo" />
+                              <Label layoutX="589.0" layoutY="113.0" text="Nº:" />
+                              <Label fx:id="numero" layoutX="661.0" layoutY="113.0" text="800" />
+                              <Label layoutX="23.0" layoutY="72.0" text="Bairro:" />
+                              <Label fx:id="bairro" layoutX="159.0" layoutY="72.0" text="Várzea" />
+                              <Label layoutX="23.0" layoutY="113.0" text="CEP:" />
+                              <Label layoutX="23.0" layoutY="161.0" text="Cidade:" />
+                              <Label fx:id="cep" layoutX="159.0" layoutY="113.0" text="53200-270" />
+                              <Label layoutX="349.0" layoutY="113.0" text="Estado:" />
+                              <Label fx:id="estado" layoutX="470.0" layoutY="113.0" text="PE" />
+                              <Label fx:id="cidade" layoutX="159.0" layoutY="161.0" text="Recife" />
+                              <Label layoutX="23.0" layoutY="205.0" text="Complemento:" />
+                              <Label fx:id="complemento" layoutX="227.0" layoutY="205.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
               </items>
             </SplitPane>
-         </children>
-      </Pane>
-      <MenuBar layoutY="-3.0" prefHeight="64.0" prefWidth="1270.0" styleClass="subtitulo">
-        <menus>
-          <Menu mnemonicParsing="false" text="Ocorrência">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Adicionar" />
-                  <MenuItem mnemonicParsing="false" text="Alterar" />
-              <MenuItem mnemonicParsing="false" text="Remover" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Afastamento">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Visualizar" />
-              <MenuItem mnemonicParsing="false" text="Adicionar" />
-                  <MenuItem mnemonicParsing="false" text="Alterar" />
-                  <MenuItem mnemonicParsing="false" text="Remover" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Banco de horas">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Ponto Diário" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Treinamento">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Visualizar" />
-                <MenuItem mnemonicParsing="false" text="Adicionar" />
-                  <MenuItem mnemonicParsing="false" text="Alterar" />
-                  <MenuItem mnemonicParsing="false" text="Remover" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-   </children>
-</AnchorPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

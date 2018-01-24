@@ -6,6 +6,7 @@ import Interfaces.IRepositorioFuncionario;
 import Repositorio.RepositorioFuncionario;
 import beans.Endereco;
 import beans.Funcionario;
+import javafx.scene.image.Image;
 
 public class ControlaFuncionario {
 	
@@ -17,6 +18,10 @@ public class ControlaFuncionario {
 	}
 	
 	
+	public int acharTipo(String cpf)
+	{
+		return funcionarios.acharTipo(cpf);
+	}
 	public String cadastrarFuncionarioMotorista(Funcionario a, Endereco b, String cnh)
 	{
 		return funcionarios.cadastrarFuncionarioBD(a, b,1, cnh);
@@ -64,6 +69,11 @@ public class ControlaFuncionario {
 	{
 		
 		return funcionarios.removerFuncionarioBD(cpf, 4);
+	}
+	
+	public boolean removerFuncionario(String cpf, int opcode)
+	{
+		return funcionarios.removerFuncionarioBD(cpf, opcode);
 	}
 	////////////////////////////////////////////////////////////////
 	
@@ -214,5 +224,13 @@ public ArrayList<Funcionario> buscarFuncionarioNome(String nome)
 	}
 
 
-	
+	/////////////////////////////////////////////////////////////////////
+	public Endereco buscaEnderecoFuncionario(String cpf)
+	{
+		return funcionarios.buscaEnderecoFuncionario(cpf);
+	}
+	public Image pegarFoto(String cpf)
+	{
+		return funcionarios.pegarFoto(cpf);
+	}
 }

@@ -29,6 +29,7 @@ import negocio.ControlaFuncionario;
 
 public class FuncionariosController {
 
+	
 	ObservableList cargos = FXCollections.observableArrayList("Motorista", "Cobrador", "Fiscal", "Gerente");
 	ObservableList estados = FXCollections.observableArrayList("AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO");
 	@FXML Button botaoCadastrar;
@@ -91,10 +92,11 @@ public class FuncionariosController {
       
 
 
-		atualizarTabela(0);
+		atualizarTabela();
 
 	}
 
+	
 
 
 	public void abrirFoto(ActionEvent event)
@@ -108,19 +110,20 @@ public class FuncionariosController {
 		labelFoto.setText(foto);
 	}
 
-	public void atualizarTabela(int opcode)
+	public void atualizarTabela()
 	{
 		ControlaFuncionario funcionariosControle = new ControlaFuncionario();
 
-		if(opcode == 0)
+		
+		if(todos.isSelected())
 		funcionarios = funcionariosControle.retornarAtivos();
-		if(opcode == 1)
+		if(motorista.isSelected())
 			funcionarios = funcionariosControle.retornarAtivosMotorista();
-		if(opcode == 2)
+		if(cobrador.isSelected())
 			funcionarios = funcionariosControle.retornarAtivosCobrador();
-		if(opcode == 3)
+		if(fiscal.isSelected())
 			funcionarios = funcionariosControle.retornarAtivosFiscal();
-		if(opcode == 4)
+		if(gerente.isSelected())
 			funcionarios = funcionariosControle.retornarAtivosGerente();
 		tabela.setItems(FXCollections.observableList(funcionarios));
 	}
@@ -214,9 +217,14 @@ public class FuncionariosController {
 
 	public void remover()
 	{
-		 Funcionario novo =  (Funcionario) tabela.getSelectionModel().getSelectedItem();
+		 Funcionario novo =  (Funcionario) 			tabela.getSelectionModel().getSelectedItem();
 		 ControlaFuncionario funcionarios = new ControlaFuncionario();
-		// funcionarios.rem
+		 //System.out.println(novo.getCpf());
+		 
+		 funcionarios.removerFuncionario(novo.getCpf(), funcionarios.acharTipo(novo.getCpf()));
+		 atualizarTabela();
+		
+		 
 	}
 	
 	public void alterar()
@@ -226,8 +234,13 @@ public class FuncionariosController {
 	
 	public void visualizar()
 	{
+		Funcionario novo =  (Funcionario) 			tabela.getSelectionModel().getSelectedItem();
+		Telas.getInstance().setCpf(novo.getCpf());
+	
+		Telas.setScene(Telas.getInstance().getTelaVisualizarFuncionario());
 		
 	}
+	
 	
 	public void buscar()
 	{
@@ -293,29 +306,5 @@ public class FuncionariosController {
 		
 	}
 
-	public void listarMotorista()
-	{
-		atualizarTabela(1);
-	}
 	
-	public void listarCobrador()
-	{
-		atualizarTabela(2);
-	}
-	
-	public void listarFiscal()
-	{
-		atualizarTabela(3);
-		
-	}
-	public void listarGerente()
-	{
-		atualizarTabela(4);
-	}
-	
-	public void listarTodos()
-	{
-		atualizarTabela(0);
-	}
-
 }

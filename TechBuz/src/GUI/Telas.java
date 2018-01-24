@@ -8,7 +8,10 @@ public class Telas {
 
 	private Scene telaInicial;
 	private Scene telaEmpresas;
+	private String cpf;
+	
 	private Scene telaFuncionarios;
+	private Scene telaVisualizarFuncionario;
 	private static Stage mainStage;
 
 	private static Telas instance;
@@ -16,6 +19,9 @@ public class Telas {
 	private Telas() {
 
 	}
+	
+
+	
 
 	public static Telas getInstance() {
 		if (instance == null) {
@@ -23,6 +29,16 @@ public class Telas {
 		}
 		return instance;
 	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	
 	public static void setScene(Scene a) {
 		mainStage.setScene(a);
@@ -64,6 +80,21 @@ public class Telas {
 				System.out.println("ERROOOOO");
 			}
 			return telaFuncionarios;
+		}
+		
+		
+		public Scene getTelaVisualizarFuncionario() {
+			try {
+				if (this.telaVisualizarFuncionario == null) { // Repare no IF.
+					// Esta linha cria uma Scene a partir de um Root, O root Ã©
+					// gerado pelo FXMLLoader e ele lanÃ§a uma exceÃ§Ã£o.
+					telaVisualizarFuncionario = new Scene(FXMLLoader.load(getClass().getResource("telavisualizarfuncionario.fxml")));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("ERROOOOO");
+			}
+			return telaVisualizarFuncionario;
 		}
 		
 		public Scene getTelaEmpresas() {

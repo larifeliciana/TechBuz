@@ -11,6 +11,7 @@ import Interfaces.IRepositorioFuncionario;
 import beans.Empresa;
 import beans.Endereco;
 import beans.Funcionario;
+import javafx.scene.image.Image;
 import Interfaces.IRepositorioFuncionario;
 
 public class RepositorioFuncionario  implements IRepositorioFuncionario{
@@ -187,8 +188,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 
 			ResultSet resultado  = stmt.executeQuery();
 
-
-
+		
 			while(resultado.next()) {
 
 				a.setAtivo(resultado.getString("funcionario.ativo"));
@@ -224,6 +224,84 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 
 	}
 	
+	public Image pegarFoto(String cpf)
+	{
+		Image foto = null;
+		
+		try
+		{
+			String query = "call retornaFoto(?)";
+			PreparedStatement stmt = con.prepareStatement(query);
+
+			stmt.setString(1, cpf);
+			
+			ResultSet resultado  = stmt.executeQuery();
+
+			
+			while(resultado.next()) {
+			
+				foto = (Image) resultado.getBlob("foto");
+		
+			}
+			resultado.close();
+			stmt.close(); 
+		}
+		catch(Exception e) {
+			System.out.println("erro Buscar endereco");
+		
+		}
+
+		return foto;
+
+		
+	}
+
+
+	public Endereco buscaEnderecoFuncionario(String cpf)
+	{
+		Endereco a = new Endereco();
+		try{
+		
+
+			String query="";
+
+			query = "call acharEnderecoFuncionario(?)";
+			PreparedStatement stmt = con.prepareStatement(query);
+
+			stmt.setString(1, cpf);
+			
+	
+			ResultSet resultado  = stmt.executeQuery();
+
+			
+			while(resultado.next()) {
+				System.out.println("teste1");
+			a.setBairro(resultado.getString("bairro"));
+			System.out.println("teste2");
+			a.setCep(resultado.getString("cep"));
+			a.setCidade(resultado.getString("cidade"));
+			a.setComplemento(resultado.getString("complemento"));
+			a.setEstado(resultado.getString("estado"));
+			a.setNumero(resultado.getString("numero"));
+			a.setRua(resultado.getString("rua"));
+
+
+			}
+			resultado.close();
+			stmt.close(); 
+		}
+		catch(Exception e) {
+			System.out.println("erro Buscar endereco");
+		
+		}
+
+		return a;
+		//return true;
+
+
+	}
+	
+
 	public ArrayList<Funcionario> buscaFuncionarioNomeBD(String nome, int opcode)
 	{
 		Funcionario a = new Funcionario();
@@ -328,6 +406,31 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 		return funcionarios;
 	}		
 
+	public int acharTipo(String cpf)
+	{
+		Funcionario a;
+		
+		
+		a = this.buscaFuncionarioBD(cpf, 1);
+		if(a.getCpf()!=null)
+			return 1;
+		
+		a = this.buscaFuncionarioBD(cpf, 2);
+		if(a.getCpf()!=null)
+			return 2;
+		
+		a = this.buscaFuncionarioBD(cpf, 3);
+		if(a.getCpf()!=null)
+			return 3;
+		
+		a = this.buscaFuncionarioBD(cpf, 4);
+		if(a.getCpf()!=null)
+			return 4;
+		
+		return -1;
+		
+		
+	}
 	public ArrayList<Funcionario> todosFuncionariosInativosBD( int opcode)
 	{
 
@@ -472,7 +575,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 
 	}
 
-
+	
 	public boolean updateFuncionarioBD(Funcionario novo)//talvez n�o esteja errado, se sim, fazer set pra tudo
 	{ 
 

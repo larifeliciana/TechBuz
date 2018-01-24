@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Endereco;
 import beans.Funcionario;
+import javafx.scene.image.Image;
 
 public interface IRepositorioFuncionario {
 
@@ -16,5 +17,8 @@ public interface IRepositorioFuncionario {
 	public abstract boolean removerFuncionarioBD(String cpf, int opcode);
 	public abstract boolean updateFuncionarioBD(Funcionario novo);
 	public abstract ArrayList<Funcionario> buscaFuncionarioNomeBD(String nome, int i);
+	public abstract int acharTipo(String cpf);
+	public abstract Endereco buscaEnderecoFuncionario(String cpf);
+	public abstract Image pegarFoto(String cpf);
 	
 }
