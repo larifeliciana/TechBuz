@@ -77,6 +77,10 @@ public class ControlaFuncionario {
 	}
 	////////////////////////////////////////////////////////////////
 	
+	public Funcionario buscarFuncionarioo(String cpf, int opcode)
+	{
+		return funcionarios.buscaFuncionarioBD(cpf, opcode);
+	}
 public Funcionario buscarFuncionario(String cpf)
 	
 	{

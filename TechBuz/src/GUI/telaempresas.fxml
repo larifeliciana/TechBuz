@@ -1,11 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1340.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EmpresasController">
    <children>
-      <Label layoutX="97.0" layoutY="154.0" text="empresa" />
+      <TabPane prefHeight="700.0" prefWidth="1340.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Empresas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="625.0" prefWidth="1340.0" stylesheets="@teste.css">
+                     <children>
+                        <TableView fx:id="tabela" layoutX="269.0" layoutY="111.0" prefHeight="486.0" prefWidth="523.0">
+                           <columns>
+                              <TableColumn fx:id="colunaNome" prefWidth="217.0" text="Nome" />
+                              <TableColumn fx:id="colunaCnpj" prefWidth="156.0" text="CNPJ" />
+                              <TableColumn fx:id="colunaEmail" prefWidth="148.0" text="E-mail" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="1247.0" layoutY="2.0" mnemonicParsing="false" styleClass="botao" stylesheets="@teste.css" text="VER INATIVOS" />
+                        <TextField fx:id="campoBusca" layoutX="384.0" layoutY="62.0" />
+                        <Button fx:id="botaoBuscar" layoutX="569.0" layoutY="62.0" mnemonicParsing="false" onAction="#buscar" styleClass="botao" stylesheets="@teste.css" text="Busca" />
+                        <Button layoutX="269.0" layoutY="614.0" mnemonicParsing="false" styleClass="botao" stylesheets="@teste.css" text="Alterar" />
+                        <Button layoutX="352.0" layoutY="614.0" mnemonicParsing="false" onAction="#remover" styleClass="botao" stylesheets="@teste.css" text="Remover" />
+                        <Button layoutX="438.0" layoutY="614.0" mnemonicParsing="false" onAction="#visualizar" styleClass="botao" stylesheets="@teste.css" text="Visualizar" />
+                        <GridPane layoutX="416.0" layoutY="15.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <RadioButton fx:id="nomeBuscar" mnemonicParsing="false" selected="true" text="Nome">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tipoBusca" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="cnpjBuscar" mnemonicParsing="false" text="CNPJ" toggleGroup="$tipoBusca" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <RadioButton fx:id="fornecedor" layoutX="810.0" layoutY="130.0" mnemonicParsing="false" onAction="#atualizarTabela" text="Fornecedor de Peças">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="cargoGrupo" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="matriz" layoutX="810.0" layoutY="175.0" mnemonicParsing="false" onAction="#atualizarTabela" text="Fornecedor de Veículos" toggleGroup="$cargoGrupo" />
+                        <RadioButton fx:id="oficina" layoutX="810.0" layoutY="224.0" mnemonicParsing="false" onAction="#atualizarTabela" text="Oficina" toggleGroup="$cargoGrupo" />
+                        <RadioButton fx:id="todos" layoutX="810.0" layoutY="267.0" mnemonicParsing="false" onAction="#atualizarTabela" selected="true" text="Todos" toggleGroup="$cargoGrupo" />
+                        <Button fx:id="volta" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" onAction="#voltar" text=" ←" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Cadastro">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="1340.0" stylesheets="@teste.css">
+                     <children>
+                        <Accordion layoutY="60.0" prefHeight="370.0" prefWidth="1534.0">
+                           <panes>
+                              <TitledPane animated="false" prefHeight="243.0" prefWidth="1534.0" text="Dados Pessoais">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="1532.0">
+                                       <children>
+                                          <Label fx:id="labelFoto" layoutX="1047.0" layoutY="174.0" prefHeight="21.0" prefWidth="212.0" />
+                                          <Label layoutX="37.0" layoutY="30.0" styleClass="textoCadastro" stylesheets="@teste.css" text="Nome:" />
+                                          <TextField fx:id="nome" layoutX="40.0" layoutY="68.0" prefHeight="25.0" prefWidth="272.0" />
+                                          <Label layoutX="359.0" layoutY="28.0" stylesheets="@teste.css" text="CNPJ:" />
+                                          <TextField fx:id="cnpj" layoutX="350.0" layoutY="68.0" prefHeight="35.0" prefWidth="215.0" promptText="______________" />
+                                          <Label layoutX="40.0" layoutY="131.0" text="E-mail:" />
+                                          <Label layoutX="627.0" layoutY="30.0" text="Razão Social" />
+                                          <TextField fx:id="email" layoutX="41.0" layoutY="167.0" prefHeight="35.0" prefWidth="269.0" />
+                                          <TextField fx:id="razao_social" layoutX="627.0" layoutY="65.0" />
+                                          <Label layoutX="359.0" layoutY="141.0" text="Tipo:" />
+                                          <ChoiceBox fx:id="tipo" layoutX="359.0" layoutY="167.0" prefWidth="150.0" />
+                                          <Label layoutX="624.0" layoutY="131.0" text="Telefone(s):" />
+                                          <TextField fx:id="fone2" layoutX="624.0" layoutY="213.0" />
+                                          <TextField fx:id="fone3" layoutX="624.0" layoutY="251.0" />
+                                          <TextField fx:id="fone1" layoutX="621.0" layoutY="167.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" text="Endereço">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="37.0" layoutY="42.0" text="Endereço:" />
+                                          <Label layoutX="448.0" layoutY="42.0" text="Número:" />
+                                          <Label layoutX="690.0" layoutY="42.0" text="CEP:" />
+                                          <TextField fx:id="rua" layoutX="37.0" layoutY="76.0" prefHeight="35.0" prefWidth="327.0" />
+                                          <TextField fx:id="numero" layoutX="448.0" layoutY="76.0" prefHeight="35.0" prefWidth="140.0" />
+                                          <TextField fx:id="cep" layoutX="692.0" layoutY="76.0" />
+                                          <TextField fx:id="complemento" layoutX="998.0" layoutY="76.0" prefHeight="35.0" prefWidth="248.0" />
+                                          <Label layoutX="1008.0" layoutY="42.0" text="Complemento:" />
+                                          <Label layoutX="37.0" layoutY="147.0" text="Bairro:" />
+                                          <Label layoutX="316.0" layoutY="149.0" text="Cidade:" />
+                                          <Label layoutX="574.0" layoutY="149.0" text="Estado:" />
+                                          <TextField fx:id="bairro" layoutX="37.0" layoutY="179.0" />
+                                          <TextField fx:id="cidade" layoutX="316.0" layoutY="184.0" />
+                                          <ChoiceBox fx:id="estado" layoutX="574.0" layoutY="184.0" prefWidth="150.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </panes>
+                        </Accordion>
+                        <ToolBar layoutY="-2.0" prefHeight="65.0" prefWidth="1340.0">
+                           <items>
+                              <Button fx:id="volta1" mnemonicParsing="false" onAction="#voltar" prefHeight="38.0" prefWidth="48.0" text=" ←" />
+                              <Button fx:id="botaoCadastrar" mnemonicParsing="false" onAction="#cadastrar" styleClass="botao" stylesheets="@teste.css" text="Finalizar Cadastro" />
+                              <TextFlow prefHeight="47.0" prefWidth="445.0" textAlignment="CENTER">
+                                 <children>
+                                    <Label fx:id="msg" prefHeight="21.0" prefWidth="374.0" textAlignment="CENTER" />
+                                 </children>
+                              </TextFlow>
+                           </items>
+                        </ToolBar>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

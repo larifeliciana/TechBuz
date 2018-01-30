@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1340.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InicialController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1340.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InicialController">
    <children>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="309.0" layoutY="98.0">
-         <image>
-            <Image url="@empresa-icone-3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="719.0" layoutY="98.0">
-         <image>
-            <Image url="@../../../../../funcionario.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="empresas" layoutX="359.0" layoutY="338.0" mnemonicParsing="false" onAction="#telaEmpresa" styleClass="botao" stylesheets="@teste.css" text="Empresas">
+      <Button fx:id="empresas" layoutX="139.0" layoutY="106.0" mnemonicParsing="false" onAction="#telaEmpresa" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" stylesheets="@teste.css" text="Empresas">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="funcionarios" layoutX="757.0" layoutY="331.0" mnemonicParsing="false" onAction="#telaFuncionarios" styleClass="botao" stylesheets="@teste.css" text="Funcionários">
+      <Button fx:id="funcionarios" layoutX="139.0" layoutY="322.0" mnemonicParsing="false" onAction="#telaFuncionarios" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" stylesheets="@teste.css" text="Funcionários">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="466.0" layoutY="106.0" mnemonicParsing="false" onAction="#telaOnibus" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Veículos" />
+      <Button layoutX="466.0" layoutY="319.0" mnemonicParsing="false" prefHeight="165.0" prefWidth="276.0" styleClass="botaoMaior" text="Viagens" />
+      <Button layoutX="818.0" layoutY="105.0" mnemonicParsing="false" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Linhas" />
+      <Button layoutX="817.0" layoutY="316.0" mnemonicParsing="false" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Clientes" />
    </children>
 </AnchorPane>

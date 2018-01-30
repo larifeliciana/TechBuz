@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import negocio.ControlaFuncionario;
 
 public class VisualizarFuncionarioController {
 
+	private String cpfString;
     @FXML
     private ImageView foto;
 
@@ -32,6 +35,11 @@ public class VisualizarFuncionarioController {
     @FXML
     private Menu menuOcorrencia;
 
+    @FXML 
+    private MenuItem adicionarOcorrencia;
+    @FXML 
+    private MenuItem RemoverOcorrencia;
+    
     @FXML
     private Menu menuAfastamento;
 
@@ -83,13 +91,17 @@ public class VisualizarFuncionarioController {
     @FXML
     private Label complemento;
     
+    
     @FXML private void initialize()
     {
     	System.out.println("teste");
     	String cpf = Telas.getInstance().getCpf();
+    	this.cpfString = cpf;
     	
+    	System.out.println(cpfString);
     	ControlaFuncionario funcionarios = new ControlaFuncionario();
     	int cargoInt = funcionarios.acharTipo(cpf) ;
+    	//System.out.println(cargoInt+"+++");
     	String cargos = "";
     	
     	if(cargoInt == 1)
@@ -106,10 +118,13 @@ public class VisualizarFuncionarioController {
     	
     	cargo.setText(cargos);
     	
+    //	System.out.println("1");
     	Funcionario novo = funcionarios.buscarFuncionario(cpf);
     	
     	this.nome.setText(novo.getNome());
     	this.cpf.setText(novo.getCpf());
+    	
+    	System.out.println("2");
     	
     	if(novo.getAtivo().equals("S"))
     		this.ativo.setText("Ativo");
@@ -117,6 +132,7 @@ public class VisualizarFuncionarioController {
     		this.ativo.setText("Inativo");
     	this.telefone.setText(novo.getFone_2());
     	
+    	System.out.println("3");
     	if(novo.getDisponibilidade().equals("S"))
     		this.disponibilidade.setText("Disponível");
     	else
@@ -144,4 +160,36 @@ public class VisualizarFuncionarioController {
     	
     }
 
+    public  void telaOcorrencia()
+    
+    {
+    	
+    	Stage tela = new Stage();
+    	tela.setScene(Telas.getInstance().getTelaOcorrencia());
+    	tela.show();
+    }
+    
+    
+    @FXML private void voltar()
+    {
+    	Telas.getInstance().setScene(Telas.getInstance().getTelaInicial());
+    }
+    
+    public void telaAdicionarOcorrencia()
+    {
+
+    	Stage tela = new Stage();
+    	tela.setScene(Telas.getInstance().getTelaAdicionarOcorrencia());
+    	tela.show();
+
+    }
+    
+    public void telaAfastamento()
+    {
+
+    	Stage tela = new Stage();
+    	tela.setScene(Telas.getInstance().getTelaAfastamento());
+    	tela.show();
+
+    }
 }

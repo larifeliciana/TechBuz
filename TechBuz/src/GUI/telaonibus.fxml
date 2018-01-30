@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1270.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.OnibusController">
+   <children>
+      <TabPane prefHeight="650.0" prefWidth="1270.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Veículos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="274.0">
+                     <children>
+                        <TableView fx:id="tabelaFrota" layoutX="154.0" layoutY="14.0" prefHeight="252.0" prefWidth="551.0">
+                          <columns>
+                            <TableColumn fx:id="colunaEmpresa" prefWidth="303.0" text="Empresa " />
+                            <TableColumn fx:id="colunaIdadeMedia" prefWidth="99.0" text="Idade Média" />
+                              <TableColumn fx:id="colunaQuantidade" prefWidth="108.0" text="Quantidade" />
+                              <TableColumn fx:id="colunaCnpj" prefWidth="113.0" text="CNPJ" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaOnibus" layoutX="152.0" layoutY="295.0" prefHeight="299.0" prefWidth="553.0">
+                          <columns>
+                            <TableColumn fx:id="colunaPlaca" prefWidth="89.0" text="Placa" />
+                            <TableColumn fx:id="colunaTipo" prefWidth="90.0" text="Tipo" />
+                              <TableColumn fx:id="colunaOperacao" prefWidth="82.0" text="Operação" />
+                              <TableColumn fx:id="colunaDisponibilidade" prefWidth="109.0" text="Disponibilidade" />
+                              <TableColumn fx:id="colunaAlocacao" prefWidth="74.0" text="Alocação" />
+                              <TableColumn fx:id="colunaLugares" prefWidth="108.0" text="Lugares" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="22.0" layoutY="354.0" mnemonicParsing="false" onAction="#alterarOnibus" prefHeight="25.0" prefWidth="122.0" text="Alterar" />
+                        <Button layoutX="721.0" layoutY="48.0" mnemonicParsing="false" onAction="#telaOrdemServico" prefHeight="25.0" prefWidth="102.0" text="Gerar Serviço" />
+                        <Button layoutX="21.0" layoutY="408.0" mnemonicParsing="false" onAction="#telaVistoria" prefHeight="25.0" prefWidth="123.0" text="Vistorias" />
+                        <Button layoutX="30.0" layoutY="23.0" mnemonicParsing="false" onAction="#removerFrota" prefHeight="25.0" prefWidth="106.0" text="Remover" />
+                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#removerOnibus" prefHeight="25.0" prefWidth="125.0" text="Remover" />
+                        <Button layoutX="20.0" layoutY="462.0" mnemonicParsing="false" onAction="#telaDocumento" prefHeight="25.0" prefWidth="128.0" text="Documentos" />
+                        <Button layoutX="20.0" layoutY="511.0" mnemonicParsing="false" onAction="#telaVencimentos" prefHeight="25.0" prefWidth="125.0" text="Vencimentos" />
+                        <TableView fx:id="tabelaOcorrencias" layoutX="828.0" layoutY="14.0" prefHeight="211.0" prefWidth="405.0">
+                          <columns>
+                            <TableColumn fx:id="descricao" prefWidth="283.0" text="Descricão" />
+                            <TableColumn fx:id="dataOcorrencia" prefWidth="117.0" text="Data" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaAcessorios" layoutX="829.0" layoutY="250.0" prefHeight="344.0" prefWidth="403.0">
+                          <columns>
+                            <TableColumn fx:id="colunaDescricao1" prefWidth="253.0" text="Descricão" />
+                            <TableColumn fx:id="colunaMarca2" prefWidth="149.0" text="Marca" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="721.0" layoutY="328.0" mnemonicParsing="false" onAction="#removerAcessorio" prefHeight="29.0" prefWidth="100.0" text="Remover" />
+                        <Button layoutX="21.0" layoutY="560.0" mnemonicParsing="false" onAction="#telaCadastrar" prefHeight="40.0" prefWidth="124.0" text="Cadastrar" />
+                        <Button layoutX="721.0" layoutY="110.0" mnemonicParsing="false" onAction="#adicionarOcorrencia" prefHeight="40.0" prefWidth="104.0" text="Adicionar" />
+                        <Label fx:id="msg" layoutX="209.0" layoutY="266.0" prefHeight="20.0" prefWidth="496.0" stylesheets="@teste1.css" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Peças">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="pecas" layoutX="533.0" layoutY="30.0" prefHeight="301.0" prefWidth="601.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNome" prefWidth="267.0" text="Nome" />
+                            <TableColumn fx:id="colunaMarca" prefWidth="143.0" text="Marca" />
+                              <TableColumn fx:id="colunaQuantidade1" prefWidth="88.0" text="Quantidade" />
+                              <TableColumn fx:id="colunaCodigo" prefWidth="96.0" text="Codigo" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="1163.0" layoutY="91.0" mnemonicParsing="false" onAction="#remover" text="Remover" />
+                        <Button layoutX="1163.0" layoutY="151.0" mnemonicParsing="false" onAction="#alterar" prefHeight="40.0" prefWidth="79.0" text="Alterar" />
+                        <Label layoutX="719.0" layoutY="445.0" stylesheets="@teste1.css" text="Nome:" />
+                        <Label layoutX="719.0" layoutY="496.0" stylesheets="@teste1.css" text="Marca:" />
+                        <Label layoutX="717.0" layoutY="550.0" stylesheets="@teste1.css" text="Quantidade:" />
+                        <TextField fx:id="nome" layoutX="816.0" layoutY="427.0" prefHeight="36.0" prefWidth="136.0" />
+                        <TextField fx:id="marca" layoutX="813.0" layoutY="472.0" prefHeight="36.0" prefWidth="141.0" />
+                        <TextField fx:id="quantidade" layoutX="814.0" layoutY="532.0" prefHeight="36.0" prefWidth="143.0" />
+                        <Button layoutX="989.0" layoutY="520.0" mnemonicParsing="false" text="Cadastrar" />
+                        <TableView fx:id="tabelaFornecedor" layoutX="133.0" layoutY="30.0" prefHeight="548.0" prefWidth="319.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNomeFornecedor" prefWidth="250.0" text="Nome" />
+                            <TableColumn fx:id="colunaCnpjFornecedor" prefWidth="169.0" text="CNPJ" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Acessórios">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="725.0" layoutY="112.0" text="Marca:" />
+                        <Label layoutX="730.0" layoutY="187.0" text="Estado:" />
+                        <TextField fx:id="nome1" layoutX="793.0" layoutY="40.0" />
+                        <TextField fx:id="marca1" layoutX="793.0" layoutY="104.0" />
+                        <ChoiceBox fx:id="estado1" layoutX="793.0" layoutY="187.0" prefHeight="42.0" prefWidth="164.0" />
+                        <TableView fx:id="acessorios" layoutX="153.0" layoutY="48.0" prefHeight="515.0" prefWidth="465.0">
+                           <columns>
+                              <TableColumn fx:id="colunaNome1" prefWidth="184.0" text="Nome" />
+                              <TableColumn fx:id="colunaMarca1" prefWidth="125.0" text="Marca" />
+                              <TableColumn fx:id="colunaEstado" prefWidth="128.0" text="Estado" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="728.0" layoutY="48.0" text="Nome:" />
+                        <TextField fx:id="placa" layoutX="738.0" layoutY="447.0" />
+                        <Button layoutX="932.0" layoutY="445.0" mnemonicParsing="false" onAction="#instalar" text="Instalar" />
+                        <Label layoutX="668.0" layoutY="455.0" stylesheets="@teste1.css" text="Placa:" />
+                        <Button layoutX="1030.0" layoutY="100.0" mnemonicParsing="false" onAction="#cadastrarAcessorio" text="Cadastrar" />
+                        <Button layoutX="31.0" layoutY="110.0" mnemonicParsing="false" onAction="#removerAcessorio" text="Remover" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

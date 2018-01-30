@@ -188,24 +188,23 @@ public class FuncionariosController {
 			{
 			labelFoto.setText("");
 			nome.setText("");
-			cpf.setText("");;
-			identidade.setText("");;
-			cnh.setText("");;
-			email.setText("");;
-			fone_1.setText("");;
-			fone_2.setText("");;
+			cpf.setText("");
+			identidade.setText("");
+			cnh.setText("");
+			email.setText("");
+			fone_1.setText("");
+			fone_2.setText("");
 			nascimento.setValue(null);
-			data_admissao.setValue(null);;
+			data_admissao.setValue(null);
 
 			cargo.setValue(null);;
-			rua.setText("");;
-			numero.setText("");;
-			cep.setText("");;
-			complemento.setText("");;
-			bairro.setText("");;
-			cidade.setText("");;
-			estado.setValue(null);;
-			}
+			rua.setText("");
+			numero.setText("");
+			cep.setText("");
+			complemento.setText("");
+			bairro.setText("");
+			cidade.setText("");
+			estado.setValue(null);			}
 			}catch(Exception e)
 		{
 			System.out.println("exceção");
@@ -234,7 +233,10 @@ public class FuncionariosController {
 	
 	public void visualizar()
 	{
+		
 		Funcionario novo =  (Funcionario) 			tabela.getSelectionModel().getSelectedItem();
+		
+		System.out.println("MUDOU");
 		Telas.getInstance().setCpf(novo.getCpf());
 	
 		Telas.setScene(Telas.getInstance().getTelaVisualizarFuncionario());

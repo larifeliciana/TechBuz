@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1270.0" stylesheets="@teste1.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="599.0" prefWidth="393.0">
+         <children>
+            <ImageView fx:id="foto" fitHeight="297.0" fitWidth="216.0" layoutX="49.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../jose%20fino.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="cargo" layoutX="113.0" layoutY="373.0" text="Cargo" />
+            <Label fx:id="ativo" layoutX="116.0" layoutY="416.0" text="Ativo" />
+            <Label fx:id="disponibilidade" layoutX="93.0" layoutY="468.0" text="Disponível" />
+            <Label fx:id="data_admissao" layoutX="93.0" layoutY="521.0" text="17/10/1997" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="339.0" layoutY="91.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="917.0" style="-fx-text-fill: white;">
+         <children>
+            <Label layoutX="15.0" layoutY="22.0" text="Nome:" />
+            <Label fx:id="nome" layoutX="142.0" layoutY="22.0" styleClass="labeldiferente" text="José Fino" />
+            <Label layoutX="14.0" layoutY="58.0" text="CPF:" />
+            <Label fx:id="cpf" layoutX="143.0" layoutY="58.0" text="70283919493" />
+            <Label layoutX="368.0" layoutY="54.0" text="RG:" />
+            <Label fx:id="telefone" layoutX="555.0" layoutY="136.0" text="Label" />
+            <Label layoutX="15.0" layoutY="99.0" text="E-mail:" />
+            <Label fx:id="email" layoutX="142.0" layoutY="96.0" text="jose@gmail.com" />
+            <Label layoutX="601.0" layoutY="51.0" text="Nascimento:" />
+            <Label fx:id="celular" layoutX="148.0" layoutY="141.0" text="Label" />
+            <Label layoutX="15.0" layoutY="141.0" text="Celular:" />
+            <Label layoutX="399.0" layoutY="136.0" text="Telefone:" />
+            <Label fx:id="rg" layoutX="429.0" layoutY="53.0" text="Label" />
+            <Label fx:id="nascimento" layoutX="786.0" layoutY="51.0" text="Label" />
+         </children>
+      </AnchorPane>
+      <MenuBar fx:id="menu" prefHeight="64.0" prefWidth="1270.0" stylesheets="@teste1.css">
+         <menus>
+            <Menu fx:id="menuOcorrencia" mnemonicParsing="false" text="Ocorrência">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#telaAdicionarOcorrencia" text="Adicionar" />
+                  <MenuItem mnemonicParsing="false" onAction="#telaOcorrencia" text="Alterar e Remover" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuAfastamento" mnemonicParsing="false" text="Afastamento" />
+            <Menu fx:id="menuBancoHoras" mnemonicParsing="false" text="Banco de horas">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Ponto Diário" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuTreinamento" mnemonicParsing="false" text="Treinamento">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Visualizar" />
+                  <MenuItem mnemonicParsing="false" text="Adicionar" />
+                  <MenuItem mnemonicParsing="false" text="Alterar" />
+                  <MenuItem mnemonicParsing="false" text="Remover" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane layoutX="339.0" layoutY="349.0" minHeight="0.0" minWidth="0.0" prefHeight="287.0" prefWidth="758.0" style="-fx-text-fill: white;" styleClass="labeldiferente">
+         <children>
+            <Label layoutX="23.0" layoutY="30.0" text="Rua:" />
+            <Label fx:id="rua" layoutX="159.0" layoutY="30.0" text="Rua Almir Azevedo" />
+            <Label layoutX="589.0" layoutY="113.0" text="Nº:" />
+            <Label fx:id="numero" layoutX="661.0" layoutY="113.0" text="800" />
+            <Label layoutX="23.0" layoutY="72.0" text="Bairro:" />
+            <Label fx:id="bairro" layoutX="159.0" layoutY="72.0" text="Várzea" />
+            <Label layoutX="23.0" layoutY="113.0" text="CEP:" />
+            <Label layoutX="23.0" layoutY="161.0" text="Cidade:" />
+            <Label fx:id="cep" layoutX="159.0" layoutY="113.0" text="53200-270" />
+            <Label layoutX="349.0" layoutY="113.0" text="Estado:" />
+            <Label fx:id="estado" layoutX="470.0" layoutY="113.0" text="PE" />
+            <Label fx:id="cidade" layoutX="159.0" layoutY="161.0" text="Recife" />
+            <Label layoutX="23.0" layoutY="205.0" text="Complemento:" />
+            <Label fx:id="complemento" layoutX="227.0" layoutY="205.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

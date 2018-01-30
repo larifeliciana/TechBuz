@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CadastrarOnibusController">
+   <children>
+      <Label layoutX="67.0" layoutY="82.0" stylesheets="@teste1.css" text="Placa:" />
+      <Label layoutX="68.0" layoutY="196.0" stylesheets="@teste1.css" text="Data inclusão:" />
+      <Label layoutX="70.0" layoutY="288.0" stylesheets="@teste1.css" text="Ano:" />
+      <Label layoutX="68.0" layoutY="244.0" stylesheets="@teste1.css" text="Lugares" />
+      <Label layoutX="67.0" layoutY="137.0" stylesheets="@teste1.css" text="Empresa:" />
+      <TextField fx:id="placa" layoutX="164.0" layoutY="68.0" />
+      <TextField fx:id="sentados" layoutX="166.0" layoutY="226.0" prefHeight="36.0" prefWidth="83.0" />
+      <TextField fx:id="ano" layoutX="155.0" layoutY="270.0" />
+      <ChoiceBox fx:id="empresa" layoutX="171.0" layoutY="109.0" prefHeight="42.0" prefWidth="166.0" />
+      <DatePicker fx:id="data" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="159.0" />
+      <Button layoutX="381.0" layoutY="308.0" mnemonicParsing="false" onAction="#cadatrar" text="Cadastrar" />
+      <Label layoutX="64.0" layoutY="26.0" styleClass="labelTitulo" stylesheets="@teste1.css" text="Cadastro Ônibus" />
+      <Label fx:id="msg" layoutX="243.0" layoutY="26.0" stylesheets="@teste1.css" />
+      <Label layoutX="71.0" layoutY="340.0" stylesheets="@teste1.css" text="Tipo" />
+      <ChoiceBox fx:id="tipo" layoutX="155.0" layoutY="319.0" prefHeight="42.0" prefWidth="173.0" />
+      <Label fx:id="msg" layoutX="319.0" layoutY="38.0" prefHeight="20.0" prefWidth="278.0" stylesheets="@teste1.css" />
+   </children>
+</AnchorPane>

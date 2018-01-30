@@ -4,12 +4,13 @@ import java.sql.Date;
 
 public class Afastamento {
 	
-	private String codigo;
+	private int codigo;
 	private Date inicio, fim;
 	private String funcionario_cpf;
-	private String tipo_cod;
+	private int tipo_cod;
+	private String tipo;
 	
-	public Afastamento(String codigo, Date inicio, Date fim, String funcionario_cpf, String tipo_cod) {
+	public Afastamento(int codigo, Date inicio, Date fim, String funcionario_cpf, int tipo_cod) {
 
 		this.codigo = codigo;
 		this.inicio = inicio;
@@ -24,14 +25,25 @@ public class Afastamento {
 		
 	}
 
+	
 
-	public String getCodigo() {
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public int getCodigo() {
 		return codigo;
 	}
 
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setCodigo(int i) {
+		this.codigo = i;
 	}
 
 
@@ -65,12 +77,12 @@ public class Afastamento {
 	}
 
 
-	public String getTipo_cod() {
+	public int getTipo_cod() {
 		return tipo_cod;
 	}
 
 
-	public void setTipo_cod(String tipo_cod) {
+	public void setTipo_cod(int tipo_cod) {
 		this.tipo_cod = tipo_cod;
 	}
 	

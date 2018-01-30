@@ -31,6 +31,9 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 	{
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+		
+		System.out.println("teste111");
 		}
 		catch(Exception e)
 		{
@@ -38,14 +41,13 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		}
 	}
 	
-	public boolean cadastrarEmpresaBD(Empresa a,Endereco b, int opcode)
+	public String cadastrarEmpresaBD(Empresa a,Endereco b, int opcode)
 	{
 		//1 fornecedor
 		//2 matriz empresa
 		//3 oficina
 		//4 todos
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
 			
 			String query = "call inserirEmpresa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);";
 			PreparedStatement stmt = con.prepareStatement(query);
@@ -66,14 +68,13 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 			
 			stmt.executeUpdate();
 			stmt.close(); 
-			con.close();
+			 
 			}
 			catch(Exception e) {
-				System.out.println("nao deu certo inserir empresa");
-				return false;
+				return("nao deu certo inserir empresa");
 			}
 			
-			return true;
+			return "Empresa cadastrada";
 		
 	}
 	
@@ -82,8 +83,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		Empresa a = new Empresa();
 		try{
 			
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-			
+		
 		
 			String query = "";
 			
@@ -105,7 +105,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 			}
 			resultado.close();
 			stmt.close(); 
-			con.close();
+			 
 			}
 			catch(Exception e) {
 				System.out.println("nao deu certo");
@@ -118,13 +118,36 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 	}
 	
+
+	public int acharTipo(String cnpj)
+	{
+		Empresa nova = new Empresa();
+		
+		nova = this.buscaEmpresaBD(cnpj, 1);
+	
+		if(nova.getCnpj()!=null)
+			return 1;
+	
+		nova = this.buscaEmpresaBD(cnpj, 2);
+		
+		if(nova.getCnpj()!=null)
+			return 2;
+	
+		nova = this.buscaEmpresaBD(cnpj, 3);
+		
+		if(nova.getCnpj()!=null)
+			return 3;
+	
+		return -1;
+	}
+	
+	
 	public boolean removerEmpresaBD(String cnpj, int opcode)
 	{
 		
 
 		try{
 		
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
 			
 		String query = "call removerEmpresa(?, ?)";
 		PreparedStatement stmt = con.prepareStatement(query);
@@ -134,7 +157,6 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 		stmt.executeUpdate();
 		stmt.close(); 
-		con.close();
 		}
 		catch(Exception e) {
 			System.out.println("nao deu certo remover");
@@ -151,28 +173,32 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		ArrayList empresas = new ArrayList<Empresa>();
 		
 		try {
-			String query = "call listarEmpresas(?);";
+			String query = "call listarEmpresas(?)";
+
+
 			PreparedStatement stmt = con.prepareStatement(query);
 			
+		
+			stmt.setInt(1, opcode);
 			ResultSet resultado = stmt.executeQuery();
-			
+
 			Empresa a;
 			
 			
 			while(resultado.next()) {
 			
 			a = new Empresa();
-			a.setCnpj(resultado.getString("cnpj"));
-			a.setNome(resultado.getString("nome"));
-			a.setEmail(resultado.getString("email"));
-			a.setRazao_social(resultado.getString("razao_social"));
+			a.setCnpj(resultado.getString("empresa.cnpj"));
+			a.setNome(resultado.getString("empresa.nome"));
+			a.setEmail(resultado.getString("empresa.email"));
+			a.setRazao_social(resultado.getString("empresa.razao_social"));
 			
 			empresas.add(a);
 			
 			}
 			resultado.close();
 			stmt.close(); 
-			con.close();
+			 
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -186,11 +212,28 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 	}
 	
+	public void adicionarTelefone(String telefone, String cnpj)
+	{
+		try
+		{
+			String query = "Insert into fones values(?,?)";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, cnpj);
+			stmt.setString(2, telefone);
+			
+			
+			stmt.executeUpdate();
+			stmt.close(); 
+
+		}catch(Exception e)
+		{
+			System.out.println("Erro Adicionar fone");
+		}
+	}
 	public boolean cadastrarContrato(Contrato a)
 	{
 		try
 		{
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
 			
 			
 			String query = "call inserirContrato(?,?,?,?,?, ?);";
@@ -205,7 +248,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 
 			stmt.executeUpdate();
 			stmt.close(); 
-			con.close();
+			 
 			
 			return true;
 		}
@@ -225,7 +268,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 	{
 		try{
 			
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
+			
 			
 		String query = "call removerContrato(?, ?)";
 		PreparedStatement stmt = con.prepareStatement(query);
@@ -235,7 +278,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 		
 		stmt.executeUpdate();
 		stmt.close(); 
-		con.close();
+		 
 		}
 		catch(Exception e) {
 			System.out.println("nao deu certo removerContrato");

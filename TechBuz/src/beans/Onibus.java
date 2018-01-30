@@ -8,7 +8,7 @@ public class Onibus {
 	private String tipo; //tipo de onibus microonibus/sanfona/normal
 	private String operacao; //tipo de operacao que o onibus realiza
 	private Date data_inclusao; //data de inclusao na frota
-	private char disponibilidade; //se esta disponivel para qualquer operação
+	private char disponibilidade; //se esta disponivel para qualquer operaï¿½ï¿½o
 	private char status_alocacao; //Se esta alocado para viagem
 	private int sentado;
 	private int cod_frota;
@@ -122,6 +122,14 @@ public class Onibus {
 
 	public void setAno(int ano) {
 		this.ano = ano;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Onibus [placa=" + placa + ", tipo=" + tipo + ", operacao=" + operacao + ", data_inclusao="
+				+ data_inclusao + ", disponibilidade=" + disponibilidade + ", status_alocacao=" + status_alocacao
+				+ ", sentado=" + sentado + ", cod_frota=" + cod_frota + ", ano=" + ano + "]";
 	}
 	
 	//#getters and setters

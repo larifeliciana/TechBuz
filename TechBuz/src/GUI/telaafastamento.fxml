@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@teste1.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AfastamentoController">
+   <children>
+      <AnchorPane layoutX="-1.0" layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="21.0" layoutY="25.0" text="Funcionário:" />
+            <Label fx:id="nome" layoutX="272.0" layoutY="24.0" text="Jose Fino" />
+            <Label fx:id="cpf" layoutX="150.0" layoutY="25.0" text="70283919493" />
+            <DatePicker fx:id="inicio" layoutX="401.0" layoutY="138.0" />
+            <DatePicker fx:id="fim" layoutX="401.0" layoutY="211.0" />
+            <Label layoutX="401.0" layoutY="186.0" text="Fim:" />
+            <TableView fx:id="tabela" layoutX="50.0" layoutY="100.0" prefHeight="274.0" prefWidth="314.0">
+              <columns>
+                <TableColumn fx:id="colunaInicio" prefWidth="103.0" text="Inicio" />
+                <TableColumn fx:id="colunaFim" prefWidth="96.0" text="Fim" />
+                  <TableColumn fx:id="colunaTipo" prefWidth="114.0" text="Tipo" />
+              </columns>
+            </TableView>
+            <ChoiceBox fx:id="tipo" layoutX="401.0" layoutY="286.0" prefHeight="26.0" prefWidth="158.0" stylesheets="@teste.css" />
+            <Button layoutX="480.0" layoutY="348.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="26.0" prefWidth="109.0" text="Cadastrar" />
+            <Label layoutX="401.0" layoutY="261.0" text="Tipo" />
+            <Label layoutX="401.0" layoutY="107.0" text="Início:" />
+            <Button layoutX="379.0" layoutY="348.0" mnemonicParsing="false" onAction="#alterar" text="Alterar" />
+            <Button layoutX="52.0" layoutY="59.0" mnemonicParsing="false" onAction="#remover" text="Remover" />
+            <Label layoutX="408.0" layoutY="19.0" prefHeight="20.0" prefWidth="180.0" styleClass="labelTitulo" text="Afastamentos" />
+            <Button layoutX="152.0" layoutY="59.0" mnemonicParsing="false" text="Encerrar" />
+            <Label fx:id="msg" layoutX="287.0" layoutY="71.0" prefHeight="20.0" prefWidth="174.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@teste1.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.TelaAdicionarOcorrenciaController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="21.0" layoutY="25.0" style="-fx-text-fill: white;" stylesheets="@teste.css" text="Funcionário:" />
+            <Label fx:id="nome" layoutX="272.0" layoutY="24.0" text="Jose Fino" />
+            <Label fx:id="cpf" layoutX="150.0" layoutY="25.0" text="70283919493" />
+            <Label layoutX="21.0" layoutY="93.0" text="Data:" />
+            <DatePicker fx:id="data" layoutX="121.0" layoutY="88.0" prefHeight="47.0" prefWidth="176.0" />
+            <Label layoutX="21.0" layoutY="146.0" text="Status:" />
+            <ChoiceBox fx:id="status" layoutX="121.0" layoutY="138.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="tipo" layoutX="121.0" layoutY="189.0" prefWidth="150.0" />
+            <Label layoutX="22.0" layoutY="192.0" text="Tipo:" />
+            <Label layoutX="313.0" layoutY="91.0" text="Justificativa:" />
+            <TextArea fx:id="justificativa" layoutX="313.0" layoutY="125.0" prefHeight="240.0" prefWidth="276.0" />
+            <Label fx:id="horariosumir" layoutX="22.0" layoutY="237.0" text="Horário:" />
+            <TextField fx:id="horario" layoutX="124.0" layoutY="233.0" prefHeight="26.0" prefWidth="82.0" promptText="HH:MM" />
+            <TextField fx:id="motivo" layoutX="122.0" layoutY="272.0" />
+            <TextField fx:id="valor" layoutX="122.0" layoutY="312.0" />
+            <Label fx:id="motivosumir" layoutX="21.0" layoutY="277.0" text="Motivo:" />
+            <Label fx:id="valorsumir" layoutX="23.0" layoutY="317.0" text="Valor:" />
+            <Button layoutX="150.0" layoutY="353.0" mnemonicParsing="false" onAction="#cadastrar" styleClass="botao" text="Cadastrar" />
+            <Label fx:id="msg" layoutX="209.0" layoutY="52.0" prefHeight="16.0" prefWidth="379.0" text="Label" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

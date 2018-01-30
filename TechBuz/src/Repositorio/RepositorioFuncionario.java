@@ -207,7 +207,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 				if(opcode == 1)
 					a.setCnh(resultado.getString("motorista.cnh"));
 
-
+				
 
 			}
 			resultado.close();
@@ -285,7 +285,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			a.setNumero(resultado.getString("numero"));
 			a.setRua(resultado.getString("rua"));
 
-
+			System.out.println("teste3");
 			}
 			resultado.close();
 			stmt.close(); 
@@ -352,6 +352,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 
 
 	}
+
 
 	public ArrayList<Funcionario> todosFuncionariosAtivosBD(int opcode)
 	{
@@ -427,6 +428,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 		if(a.getCpf()!=null)
 			return 4;
 		
+		System.out.println("não achou o tipo");
 		return -1;
 		
 		

@@ -18,5 +18,12 @@ public class InicialController {
 	{
 		Telas.setScene(Telas.getInstance().getTelaFuncionarios());
 	}
-
+	
+	@FXML public void telaOnibus()
+	{
+		Telas.setScene(Telas.getInstance().getTelaOnibus());
+	}
+	
+	
+	
 }
