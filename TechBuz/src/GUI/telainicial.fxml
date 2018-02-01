@@ -18,7 +18,7 @@
       </Button>
       <Button layoutX="466.0" layoutY="106.0" mnemonicParsing="false" onAction="#telaOnibus" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Veículos" />
       <Button layoutX="466.0" layoutY="319.0" mnemonicParsing="false" prefHeight="165.0" prefWidth="276.0" styleClass="botaoMaior" text="Viagens" />
-      <Button layoutX="818.0" layoutY="105.0" mnemonicParsing="false" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Linhas" />
+      <Button layoutX="818.0" layoutY="105.0" mnemonicParsing="false" onAction="#telaLinhas" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Linhas" />
       <Button layoutX="817.0" layoutY="316.0" mnemonicParsing="false" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Clientes" />
    </children>
 </AnchorPane>

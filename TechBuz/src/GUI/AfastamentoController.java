@@ -38,7 +38,7 @@ public class AfastamentoController {
 	private DatePicker fim;
 
 	@FXML 
-	private TableView tabela;
+	private TableView<Afastamento> tabela;
 
 	@FXML
 	private TableColumn<Afastamento, Date> colunaInicio;
@@ -50,10 +50,12 @@ public class AfastamentoController {
 	private TableColumn<Afastamento, String> colunaTipo;
 
 	@FXML
-	private ChoiceBox<String> tipo;
+	private ChoiceBox<TipoAfastamento> tipo;
 
 	@FXML private Label msg;
 
+	ControlaAfastamento afastamentos = new ControlaAfastamento();
+	
 	@FXML void initialize()
 	{
 	
@@ -66,18 +68,10 @@ public class AfastamentoController {
 		this.nome.setText(a.getNome());
 		
 		this.cpf.setText(cpfString);
-		ControlaAfastamento afastamentos = new ControlaAfastamento();
 		
 		ArrayList<TipoAfastamento> tipoArray = afastamentos.listarTipoAfastamento();
-		ArrayList<String> tipoString = new ArrayList<String>();
 		
-		for(int i = 0; i < tipoArray.size(); i++)
-		{
-			tipoString.add(tipoArray.get(i).getDescricao());
-		}
 		
-		ObservableList lista = FXCollections.observableArrayList(tipoString);
-	
 		colunaInicio.setCellValueFactory(new PropertyValueFactory<>("inicio"));
 		colunaFim.setCellValueFactory(new PropertyValueFactory<>("fim"));
 		colunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
@@ -86,7 +80,9 @@ public class AfastamentoController {
 		ObservableList listat = FXCollections.observableArrayList(afastamentos.listarAfastamentoFuncionario(cpfString));
 		tabela.setItems(listat);
 			
-		tipo.setItems(lista);
+		ObservableList listar = FXCollections.observableArrayList(afastamentos.listarTipoAfastamento());
+		
+		tipo.setItems(listar);
 	}
 	@FXML
 	void alterar() {
@@ -98,26 +94,12 @@ public class AfastamentoController {
 	void cadastrar() {
 		
 		Afastamento novo = new Afastamento();
-		ControlaAfastamento afastamentos = new ControlaAfastamento();
 		
 		novo.setInicio(Date.valueOf(this.inicio.getValue()));
-		System.out.println(novo.getInicio());
 		novo.setFim(Date.valueOf(this.fim.getValue()));
-		System.out.println(novo.getFim());
 		novo.setFuncionario_cpf(cpfString);
-		System.out.println(novo.getFuncionario_cpf());
-		ArrayList<TipoAfastamento> tipos = new ArrayList<TipoAfastamento>();
-		tipos = afastamentos.listarTipoAfastamento();
+		novo.setTipo_cod(this.tipo.getValue().getCod());
 		
-		
-		for(int i = 0; i < tipos.size(); i++)
-		{
-			if(this.tipo.getValue().toString().equals(tipos.get(i).getDescricao()))
-				novo.setCodigo(tipos.get(i).getCod());
-			
-		}
-		
-		System.out.println(novo.getCodigo());
 		msg.setText(afastamentos.cadastrarAfastamento(novo));
 		
 		
@@ -130,4 +112,8 @@ public class AfastamentoController {
 
 	}
 
+	@FXML void encerrar()
+	{
+		afastamentos.EncerraAfastamento(tabela.getSelectionModel().getSelectedItem().getCodigo());
+	}
 }

@@ -15,6 +15,7 @@ import beans.Endereco;
 import beans.Funcionario;
 import javafx.stage.Stage;
 import negocio.ControlaFuncionario;
+import negocio.ControlaOnibus;
 
 public class Conexao extends Application{
 	
@@ -34,7 +35,8 @@ public class Conexao extends Application{
 	
 	public static void main(String[] args) {
 			launch(args);
-		
+	//	ControlaOnibus onibus = new ControlaOnibus();
+		//System.out.println(onibus.acharCod());
 	}
 }  
 

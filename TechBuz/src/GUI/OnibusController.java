@@ -16,9 +16,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -71,6 +73,11 @@ public class OnibusController {
 
 	@FXML
 	private TableColumn<OcorrenciaOnibus, Date> dataOcorrencia;
+	@FXML
+	private TableColumn<OcorrenciaOnibus, Date> colunaplaca;
+
+	@FXML
+	private TableColumn<OcorrenciaOnibus, Date> tipo;
 
 
 	@FXML
@@ -93,7 +100,7 @@ public class OnibusController {
 
 	@FXML
 	private TableColumn<Peca, Integer> colunaCodigo;
-	
+
 	@FXML
 	private TableColumn<Peca, Integer> colunaQuantidade1;
 
@@ -125,9 +132,9 @@ public class OnibusController {
 	private TableView<Empresa> tabelaFornecedor;
 
 	@FXML TableColumn<Empresa, String> colunaNomeFornecedor;
-	
+
 	@FXML TableColumn<Empresa, String> colunaCnpjFornecedor;
-	
+
 	@FXML
 	private TextField nome1;
 
@@ -139,6 +146,14 @@ public class OnibusController {
 
 	@FXML private Label msg;
 
+	@FXML private RadioButton SFrota;
+
+	@FXML private RadioButton NFrota;
+
+	@FXML private ToggleGroup fr;
+
+	ControlaOnibus onibus = new ControlaOnibus();
+
 	@FXML void initialize()
 	{
 		//frota 
@@ -148,15 +163,15 @@ public class OnibusController {
 		this.colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("numero_onibus"));
 		this.colunaCnpj.setCellValueFactory(new PropertyValueFactory<>("empresa_cnpj"));
 
-		ControlaOnibus onibus = new ControlaOnibus();
-		ObservableList listaFrota = FXCollections.observableArrayList(onibus.listarFrotas());
 
-		tabelaFrota.setItems(listaFrota);
-
+		atualizarTabelaFrota();
+		///onibus sem frota
+		atualizarTabelaOnibus();
 		EventHandler selecionouFrota = new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				atualizarTabelaOnibus();
+				if(SFrota.isSelected())
+					atualizarTabelaOnibus();
 
 			}
 		};
@@ -164,11 +179,13 @@ public class OnibusController {
 		EventHandler selecionouOnibus = new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				atualizarTabelaOcorrencia();
-				atualizarTabelaAcessorios();
+				//atualizarTabelaOcorrencia();
+				//atualizarTabelaAcessorios();
 			}
 		};
 
+
+		//		tabelaFrota.setOnMouseExited(value);
 		tabelaFrota.setOnMouseClicked(selecionouFrota);
 
 		tabelaOnibus.setOnMouseClicked(selecionouOnibus);
@@ -183,38 +200,45 @@ public class OnibusController {
 		this.colunaLugares.setCellValueFactory(new PropertyValueFactory<>("sentado"));
 
 
-		///OCORRENCIA
+
 
 		this.descricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		this.dataOcorrencia.setCellValueFactory(new PropertyValueFactory<>("data_ocorrencia"));
+		this.colunaplaca.setCellValueFactory(new PropertyValueFactory<>("onibus_placa"));
+		this.tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+
+		ObservableList ocorrencias = FXCollections.observableArrayList(onibus.listarOcorrencia());
+
+		tabelaOcorrencias.setItems(ocorrencias);
 
 
 		///Acessorio
 
-		this.colunaDescricao1.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		this.colunaMarca2.setCellValueFactory(new PropertyValueFactory<>("marca"));
-		
-		
+		//		this.colunaDescricao1.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		//		this.colunaMarca2.setCellValueFactory(new PropertyValueFactory<>("marca"));
+
+
 		//Acessorio1
+
 		
 		this.colunaNome1.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		this.colunaEstado.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		this.colunaMarca1.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
 		ObservableList nova = FXCollections.observableArrayList(onibus.listarAcessoriosDisponiveis());
-		
+
 		acessorios.setItems(nova);
 
-		
+
 		//Fornecedor 
 		ControlaEmpresa empresas = new ControlaEmpresa();
-		
+
 		this.colunaCnpjFornecedor.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 		this.colunaNomeFornecedor.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		ObservableList nova1 = FXCollections.observableArrayList(empresas.todasEmpresasFornecedor());
-		
+
 		tabelaFornecedor.setItems(nova1);
-		
+
 		EventHandler selecionouFornecedor = new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -223,45 +247,87 @@ public class OnibusController {
 			}
 		};
 
-		
+
 		tabelaFornecedor.setOnMouseClicked(selecionouFornecedor);
-		
+
 		////PECAS
 		this.colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		this.colunaMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		this.colunaQuantidade1.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		this.colunaCodigo.setCellValueFactory(new PropertyValueFactory<>("cod"));
-	
+
 
 	}
 
-	@FXML void atualizarTabelaOnibus()
+	@FXML void atualizarTabelaFrota()
 	{
-		ControlaOnibus onibus = new ControlaOnibus();
-		int cod = tabelaFrota.getSelectionModel().getSelectedItem().getCod();
 
+		ObservableList listaFrota = FXCollections.observableArrayList(onibus.listarFrotas());
+		System.out.println(listaFrota);
+		tabelaFrota.setItems(listaFrota);
+
+	}
+	
+	@FXML void atualizar()
+    {
+		System.out.println("atualizar");
+		this.atualizarTabelaFrota();
+		this.atualizarTabelaOnibus();
+			
+    }
+   
+	@FXML public void atualizarTabelaOnibus()
+	{
+
+
+		if(SFrota.isSelected()) {
+			try {
+				int cod = tabelaFrota.getSelectionModel().getSelectedItem().getCod();
+
+				System.out.println(cod);
+				System.out.println("if");
+
+
+				ObservableList lista = FXCollections.observableArrayList(onibus.listarOnibusFrota(cod));
+				tabelaOnibus.setItems(lista);
+				ObservableList lista1 = FXCollections.observableArrayList();
+				//		tabelaOcorrencias.setItems(lista1);
+				//	tabelaAcessorios.setItems(lista1);
+			}
+			catch(NullPointerException e)
+			{
+				System.out.println("tem q selecionar");
+			}
+
+		}
+		else
+		{
+
+			System.out.println("ele");
+			ObservableList lista2 = FXCollections.observableArrayList(onibus.listarOnibusSemFrota());
+			tabelaOnibus.setItems(lista2);
+			ObservableList lista1 = FXCollections.observableArrayList();
+
+		}
+	}
+
+	void atualizarOnibus(int cod)
+	{
 		ObservableList lista = FXCollections.observableArrayList(onibus.listarOnibusFrota(cod));
 		tabelaOnibus.setItems(lista);
-		ObservableList lista1 = FXCollections.observableArrayList();
-		tabelaOcorrencias.setItems(lista1);
-		tabelaAcessorios.setItems(lista1);
 
 	}
-
 	@FXML  void atualizarTabelaOcorrencia()
 	{
-		ControlaOnibus onibus = new ControlaOnibus();
 		String placa = tabelaOnibus.getSelectionModel().getSelectedItem().getPlaca();
 
 		ObservableList lista = FXCollections.observableArrayList(onibus.listarOcorrenciaOnibus(placa));
 		this.tabelaOcorrencias.setItems(lista);
 
 	}
-	
+
 	@FXML void atualizarTabelaPecas()
 	{
-	
-		ControlaOnibus onibus = new ControlaOnibus();
 		String cnpj = tabelaFornecedor.getSelectionModel().getSelectedItem().getCnpj();
 		ArrayList<Peca> novo = onibus.listarPecasFornecedor(cnpj);
 		System.out.println(cnpj);
@@ -272,12 +338,12 @@ public class OnibusController {
 
 	@FXML  void atualizarTabelaAcessorios()
 	{
-		ControlaOnibus onibus = new ControlaOnibus();
 		String placa = tabelaOnibus.getSelectionModel().getSelectedItem().getPlaca();
 		ArrayList<Acessorio> novo = onibus.listarAcessorioOnibus(placa);
 		ObservableList lista = FXCollections.observableArrayList(novo);
 		this.tabelaAcessorios.setItems(lista);
 	}
+
 
 	@FXML
 	void alterarOnibus() {
@@ -305,11 +371,23 @@ public class OnibusController {
 	void alterar() {
 
 	}
-	
+
 	@FXML void cadastrarAcessorio(){
-		
+
 	}
 
+	@FXML void gerarOdem()
+	{
+		int codOcorrencia = tabelaOcorrencias.getSelectionModel().getSelectedItem().getCodigo();
+		Telas.getInstance().setCodigo(codOcorrencia);
+		Telas.getInstance().setPlaca(tabelaOcorrencias.getSelectionModel().getSelectedItem().getOnibus_placa());
+		Stage novatela = new Stage();
+
+
+		novatela.setScene(Telas.getInstance().getGerarOrdem());
+		novatela.show();
+
+	}
 	@FXML
 	void removerAcessorio() {
 		ControlaOnibus onibus  = new ControlaOnibus();
@@ -323,6 +401,31 @@ public class OnibusController {
 
 	}
 
+	
+	@FXML 
+	void adicionarFrota()
+	{
+		int cod = tabelaFrota.getSelectionModel().getSelectedItem().getCod();
+
+		onibus.adicionarAFrota(tabelaOnibus.getSelectionModel().getSelectedItem().getPlaca(), cod);
+		
+		atualizarTabelaFrota();
+		atualizarTabelaOnibus();
+	}
+	@FXML void removerDaFrota()
+	{
+		try {
+			int cod = tabelaFrota.getSelectionModel().getSelectedItem().getCod();
+			onibus.removerDaFrota(tabelaOnibus.getSelectionModel().getSelectedItem().getPlaca());
+			atualizarTabelaFrota();
+			atualizarOnibus(cod);
+		}
+		catch(NullPointerException e)
+		{
+			msg.setText("Selecione uma frota e um de seus onibus para ser removido");
+			//zerar tabela qunado não tiver nada selecionado
+		}
+	}
 	@FXML
 	void removerFrota() {
 

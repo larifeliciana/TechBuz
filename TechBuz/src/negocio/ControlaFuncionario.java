@@ -162,6 +162,10 @@ public ArrayList<Funcionario> buscarFuncionarioNome(String nome)
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	public ArrayList<Funcionario> retornaInativos()
+	{
+		return funcionarios.todosFuncionariosInativosBD(0);
+	}
 	
 	public ArrayList<Funcionario> retornaInativosMotorista()
 	{

@@ -69,6 +69,7 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 		
 		}catch(Exception e)
 		{
+			e.printStackTrace();
 			return "Afastamento não pode ser cadastrada";
 		}
 		
@@ -155,7 +156,7 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 		try{
 			String query="";
 
-			query = "call buscarAfastamento(?, ?)";
+			query = "select * from afastamento where codigo = ?";
 			PreparedStatement stmt = con.prepareStatement(query);
 
 			stmt.setInt(1, cod);
@@ -191,7 +192,7 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 		
 		Afastamento a = new Afastamento();
 		try {
-			String query = "call listarAfastamentoFuncionario(?)";
+			String query = "select * from afastamento where funcionario_cpf = ?";
 
 			PreparedStatement stmt = con.prepareStatement(query);
 
@@ -233,7 +234,8 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 	
 		try 
 		{
-			String query = "call adicionarTipoAfastametno(?)";
+			String query = "INSERT INTO tipo(descricao) values (?)" + 
+					"";
 			
 			PreparedStatement stmt = con.prepareStatement(query);
 
@@ -259,7 +261,8 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 		
 		try 
 		{
-			String query = "call removerTipoAfastametno(?)";
+			String query = "delete from tipo where cod = ?" + 
+					"";
 			
 			PreparedStatement stmt = con.prepareStatement(query);
 
@@ -301,7 +304,8 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 		
 		try
 		{
-			String query = "call listarTiposAfastamento()";
+			String query = "select * from tipo" + 
+					"";
 			PreparedStatement stmt = con.prepareStatement(query);
 
 			ResultSet resultado = stmt.executeQuery();

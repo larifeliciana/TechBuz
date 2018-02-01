@@ -15,7 +15,7 @@
 	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
 	-fx-text-fill: -fx-text-base-color;
 	-dark: rgb(47.0, 52.0, 57.0);
-	-fx-background-color: -dark;
+	-fx-background-color: grey;
 	/*default font */
 	-fx-font-family: 'Roboto Medium';
 	-fx-font-size: 14.0px;
@@ -175,6 +175,7 @@
 
 .combo-box-base>.label, .choice-box>.label {
 	-fx-padding: 0.7em 0.7em 0.7em 0em;
+	-fx-text-fill:white;
 }
 
 .combo-box-base>.arrow-button, .choice-box>.open-button {

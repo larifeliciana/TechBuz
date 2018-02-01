@@ -24,6 +24,11 @@ public class InicialController {
 		Telas.setScene(Telas.getInstance().getTelaOnibus());
 	}
 	
+	@FXML public void telaLinhas()
+	{
+		Telas.setScene(Telas.getInstance().getTelaLinhas());
+	}
+	
 	
 	
 }

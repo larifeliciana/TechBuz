@@ -75,7 +75,13 @@ public class FuncionariosController {
 	
 	@FXML RadioButton nomeBuscar;
 	@FXML RadioButton cpfBuscar;
+
+	@FXML RadioButton ativos;
+	@FXML RadioButton nativos;
 	
+
+	@FXML ToggleGroup at;
+
 
 	
 	@FXML TextField campoBusca;
@@ -114,7 +120,8 @@ public class FuncionariosController {
 	{
 		ControlaFuncionario funcionariosControle = new ControlaFuncionario();
 
-		
+
+		if(ativos.isSelected()) {
 		if(todos.isSelected())
 		funcionarios = funcionariosControle.retornarAtivos();
 		if(motorista.isSelected())
@@ -127,9 +134,25 @@ public class FuncionariosController {
 			funcionarios = funcionariosControle.retornarAtivosGerente();
 		tabela.setItems(FXCollections.observableList(funcionarios));
 	}
+		if(nativos.isSelected()){
+			System.out.println(funcionariosControle.retornaInativos());
+			if(todos.isSelected())
+				funcionarios = funcionariosControle.retornaInativos();
+				if(motorista.isSelected())
+					funcionarios = funcionariosControle.retornaInativosMotorista();
+				if(cobrador.isSelected())
+					funcionarios = funcionariosControle.retornaInativosCobrador();
+				if(fiscal.isSelected())
+					funcionarios = funcionariosControle.retornaInativosFiscal();
+				if(gerente.isSelected())
+					funcionarios = funcionariosControle.retornaInativosGerente();
+				
+				tabela.setItems(FXCollections.observableList(funcionarios));
+		}
 
 
 
+	}
 	public void cadastrar()
 	{
 		//
@@ -307,6 +330,9 @@ public class FuncionariosController {
 		
 		
 	}
-
-	
+	@FXML
+	public void voltar()
+	{
+		Telas.getInstance().setScene(Telas.getInstance().getTelaInicial());
+	}
 }

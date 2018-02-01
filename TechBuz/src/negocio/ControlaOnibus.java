@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import Interfaces.IRepositorioOnibus;
@@ -9,6 +10,7 @@ import beans.Frota;
 import beans.OcorrenciaOnibus;
 import beans.Onibus;
 import beans.Peca;
+import beans.Servico;
 
 public class ControlaOnibus {
 
@@ -36,6 +38,10 @@ public class ControlaOnibus {
 	{
 		return onibus.listarOnibus();
 		
+	}
+	public ArrayList<Onibus> listarOnibusSemFrota()
+	{
+		return onibus.listarOnibusSemFrota();
 	}
 	public  ArrayList<Onibus> listarOnibusFrota(int frota)
 	{
@@ -71,6 +77,10 @@ public class ControlaOnibus {
 		return onibus.listarOcorrenciaOnibus(onibus_placa);
 	}
 	
+	public ArrayList<OcorrenciaOnibus> listarOcorrencia()
+	{
+		return onibus.listarOcorrencia();
+	}
 	///////////////////////////////////////////////
 	
 
@@ -123,7 +133,46 @@ public class ControlaOnibus {
 	{
 		return onibus.listarPecasFornecedor(cnpj);
 	}
+	public  boolean adicionarAFrota(String placa, int frota)
+	{
+		return onibus.adicionarAFrota(placa, frota);
+	}
+	public  boolean removerDaFrota(String placa)
+	{
+		
+		return onibus.removerDaFrota(placa);
+	}
+	
 
+	public ArrayList<Servico> listarServicos()
+	{
+		return onibus.listarServicos();
+	}
+	
+	public int acharCod()
+	{
+		return onibus.acharCod();
+	}
+	public boolean inserirOrdem(String desc_servico, Date data_ordem, String gerente_cpf, 
+			String oficina_cnpj, int ocorrencia_onibus_codigo, String status_ordem)
+	{
+			return onibus.inserirOrdem(desc_servico, data_ordem, gerente_cpf, oficina_cnpj, ocorrencia_onibus_codigo, status_ordem);
+	}
+	public boolean inserirCompostaPor(int cod_ordem, int cod_servico)
+	{
+		return onibus.inserirCompostaPor(cod_ordem, cod_servico);
+	}
+
+
+	public void atualizarFrota( int cod)
+	{
+		onibus.atualizarFrota(cod);
+	}
+
+	public void atualizartodas()
+	{
+		onibus.atualizartodas();
+	}
 }
 
 

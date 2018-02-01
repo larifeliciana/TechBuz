@@ -9,12 +9,14 @@ public class Telas {
 	private Scene telaInicial;
 	private String cpf;
 	private String placa;
+	private int codigo;
 
 	private Scene telaEmpresas;
 
 
 	private Scene telaFuncionarios;
 	private Scene telaVisualizarFuncionario;
+	
 
 	private Scene telaOcorrencia;
 	private Scene telaAdicionarOcorrencia;
@@ -25,6 +27,9 @@ public class Telas {
 	private Scene telaVistorias;
 	private Scene telaDocumentos;
 	private Scene telaVencimentos;	
+	private Scene telaGerarOrdem;
+	
+	private Scene telaLinhas;
 
 
 	private static Stage mainStage;
@@ -49,6 +54,36 @@ public class Telas {
 
 		return telaOnibus;
 	}
+	
+
+	public Scene getTelaLinhas() {
+
+		try {
+			 { // Repare no IF.
+				telaLinhas = new Scene(FXMLLoader.load(getClass().getResource("telalinha.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaLinhas;
+	}
+	
+
+	public Scene getGerarOrdem() {
+
+		try {
+			 { // Repare no IF.
+				telaGerarOrdem = new Scene(FXMLLoader.load(getClass().getResource("telaGerarOrdem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaGerarOrdem;
+	}
 
 	public Scene getTelaCadastrarOnibus() {
 
@@ -70,9 +105,9 @@ public class Telas {
 	public Scene getTelaVistorias() {
 
 		try {
-			{ // Repare no IF.
+		
 				telaVistorias = new Scene(FXMLLoader.load(getClass().getResource("telavistorias.fxml")));
-			}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROOOOO");
@@ -191,6 +226,16 @@ public class Telas {
 	}
 
 
+
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 
 
 	public static void setScene(Scene a) {

@@ -66,6 +66,13 @@
                         <RadioButton fx:id="gerente" layoutX="810.0" layoutY="268.0" mnemonicParsing="false" onAction="#atualizarTabela" styleClass="label-bright" text="Gerente" toggleGroup="$cargoGrupo" />
                         <RadioButton fx:id="fiscal" layoutX="810.0" layoutY="224.0" mnemonicParsing="false" onAction="#atualizarTabela" styleClass="label-bright" text="Fiscal" toggleGroup="$cargoGrupo" />
                         <RadioButton fx:id="todos" layoutX="810.0" layoutY="306.0" mnemonicParsing="false" onAction="#atualizarTabela" selected="true" styleClass="label-bright" text="Todos" toggleGroup="$cargoGrupo" />
+                        <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+                        <RadioButton fx:id="ativos" layoutX="104.0" layoutY="105.0" mnemonicParsing="false" onAction="#atualizarTabela" selected="true" text="Ativos">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="at" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="nativos" layoutX="104.0" layoutY="142.0" mnemonicParsing="false" onAction="#atualizarTabela" text="Inativos" toggleGroup="$at" />
                      </children></AnchorPane>
             </content>
           </Tab>

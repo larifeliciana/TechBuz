@@ -2,6 +2,7 @@ package Repositorio;
 import java.sql.*;
 import java.util.ArrayList;
 
+import GUI.Telas;
 import Interfaces.IRepositorioFuncionario;
 import Interfaces.IRepositorioOnibus;
 import beans.Acessorio;
@@ -10,6 +11,7 @@ import beans.OcorrenciaOnibus;
 //import com.mysql.jdbc.*;
 import beans.Onibus;
 import beans.Peca;
+import beans.Servico;
 
 public class RepositorioOnibus implements IRepositorioOnibus{
 
@@ -55,7 +57,10 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 		try{
 
 
-			String query = "insert into onibus(placa, tipo, operacao, data_inclusao, disponibilidade, status_alocacao, num_sentados, cod_frota, ano) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "insert"
+					+ " into onibus(placa, tipo, operacao, data_inclusao,"
+					+ " disponibilidade, status_alocacao, num_sentados, cod_frota, ano)"
+					+ " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(query);
 
 			stmt.setString(1, a.getPlaca());
@@ -146,6 +151,26 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 		return true;
 
 	}
+	
+	public boolean mudarFrota(String placa, int cod_frota)
+	{
+		try {
+			
+			String query = "update onibus set cod_frota = ? where placa = ?";
+			
+			PreparedStatement stmt = con.prepareStatement(query);
+
+			stmt.setInt(1, cod_frota);
+			stmt.setString(2, placa);
+
+			stmt.executeUpdate();
+		}catch(Exception e)
+		{
+			
+			return false;
+		}
+		return true;
+	}
 
 	public ArrayList<Onibus> listarOnibus()
 	{
@@ -168,6 +193,117 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 				a = new Onibus();
 				a.setAno(resultado.getInt("ano"));
 				a.setCod_frota(resultado.getInt("cod_frota"));
+				a.setData_inclusao(resultado.getDate("data_inclusao"));
+				a.setDisponibilidade(resultado.getString("disponibilidade").charAt(0)); //char 
+				a.setOperacao(resultado.getString("operacao"));
+				a.setPlaca(resultado.getString("placa"));
+				a.setSentado(resultado.getInt("num_sentados"));
+				a.setStatus_alocacao(resultado.getString("status_alocacao").charAt(0)); //char
+				a.setTipo(resultado.getString("tipo"));
+
+				onibus.add(a);
+			}
+
+			resultado.close();
+			stmt.close(); 
+		}
+		catch(Exception e) {
+			System.out.println("nao deu certo");
+			//	return false;
+		}
+
+		return onibus;
+		//return true;
+
+
+	}
+	
+	public boolean adicionarAFrota(String placa, int frota)
+	{
+		String query = "call adicionarAFrota(?,?)";
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, placa);
+			stmt.setInt(2, frota);
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+	
+	public void atualizarFrota( int cod)
+	{
+		String query = "call frota(?)";
+				try {
+				
+					PreparedStatement stmt = con.prepareStatement(query);
+					stmt.setInt(1, cod);
+					
+					stmt.executeUpdate();
+					stmt.close();
+					
+					
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+		
+	}
+	public void atualizartodas()
+	{
+		ArrayList<Frota> nova= listarFrotas();
+		for(int i = 0; i < nova.size(); i++)
+		{
+			
+			atualizarFrota(nova.get(i).getCod());
+		}
+	}
+	public boolean removerDaFrota(String placa)
+	{
+		String query = "call removerDaFrota(?)";
+		
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(query);
+
+			stmt.setString(1, placa);
+			
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+	public ArrayList<Onibus> listarOnibusSemFrota()
+	{
+		ArrayList<Onibus> onibus = new ArrayList<Onibus>();
+
+
+		Onibus a = new Onibus();
+		try{
+
+
+
+			String query = "select * from onibus where cod_frota is null";
+					PreparedStatement stmt = con.prepareStatement(query);
+
+
+			ResultSet resultado  = stmt.executeQuery();
+
+			while(resultado.next()) {
+
+				a = new Onibus();
+				a.setAno(resultado.getInt("ano"));
+			//	a.setCod_frota(resultado.getInt("cod_frota"));
 				a.setData_inclusao(resultado.getDate("data_inclusao"));
 				a.setDisponibilidade(resultado.getString("disponibilidade").charAt(0)); //char 
 				a.setOperacao(resultado.getString("operacao"));
@@ -592,6 +728,44 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 		return onibus;
 
 	}
+	
+	public ArrayList<OcorrenciaOnibus> listarOcorrencia()
+	{
+		OcorrenciaOnibus a = new OcorrenciaOnibus();
+		ArrayList<OcorrenciaOnibus> onibus = new ArrayList<OcorrenciaOnibus>();
+
+		String query = "select * from ocorrencia_onibus";
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+		
+			ResultSet resultado = stmt.executeQuery();
+
+			while(resultado.next())
+			{
+				a = new OcorrenciaOnibus();
+				a.setCodigo(resultado.getInt("codigo"));
+				a.setData_ocorrencia(resultado.getDate("data_ocorrencia"));
+				a.setDescricao(resultado.getString("descricao"));
+				a.setEndereco_cep(resultado.getString("endereco_cep"));
+				a.setEndereco_numero(resultado.getString("endereco_numero"));
+				a.setObs(resultado.getString("obs"));
+				a.setOnibus_placa(resultado.getString("onibus_placa"));
+				a.setRegistro(resultado.getString("registro"));
+				a.setTipo(resultado.getString("tipo"));
+				a.setVistoria_seq(resultado.getInt("vistoria_seq"));
+				onibus.add(a);
+
+
+			}
+			stmt.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return onibus;
+
+	}
 /////////////////////////////////////////////////////////////////////////////////////
 	
 
@@ -627,6 +801,7 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 			stmt.setInt(1, cod);
 
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -663,6 +838,7 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 
 
 			}
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -703,8 +879,8 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 				acessorio.add(a);
 			}
 			
-			
-			
+			resultado.close();
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -746,7 +922,8 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 				}
 				
 				
-				
+				resultado.close();
+				stmt.close();
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -801,6 +978,7 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 			stmt.setInt(1, cod);
 
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -835,6 +1013,8 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 
 
 			}
+			resultado.close();
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -879,7 +1059,8 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 				peca.add(a);
 			}
 			
-			
+			resultado.close();
+			stmt.close();
 			
 		} catch (SQLException e) {
 
@@ -889,6 +1070,144 @@ public class RepositorioOnibus implements IRepositorioOnibus{
 		return peca;
 
 	}
-	
 
+	public ArrayList<Servico> listarServicos()
+	{
+		ArrayList<Servico> servicos = new ArrayList<Servico>();
+		Servico servico;
+		try {
+			String query = "select * from servico";
+			PreparedStatement stmt = con.prepareStatement(query);
+
+			ResultSet resultado = stmt.executeQuery();
+
+
+			while(resultado.next())
+			{
+				
+				servico = new Servico();
+				
+				servico.setCod(resultado.getInt("cod"));
+				servico.setDescricao(resultado.getString("descricao"));
+				servico.setObs(resultado.getString("obs"));
+				servicos.add(servico);
+			}
+		
+			stmt.close();
+		}catch(Exception e)
+			{
+				System.out.println("erro servicos");
+			}
+			
+		return servicos;
+					
+		}
+	
+	public boolean inserirOrdem(String desc_servico, Date data_ordem, String gerente_cpf, 
+			String oficina_cnpj, int ocorrencia_onibus_codigo, String status_ordem)
+	{
+		String query = "insert into ordem_servico(desc_servico, data_ordem, gerente_cpf, oficina_cnpj,ocorrencia_onibus_codigo, status_ordem, fim)  values(?,?, ?, ?, ?, ?, now())";
+		
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(query);
+			System.out.println(query);
+			System.out.println();
+
+			stmt.setString(1, desc_servico);
+			stmt.setDate(2, data_ordem);
+			stmt.setString(3, gerente_cpf);
+			stmt.setString(4, oficina_cnpj);
+			stmt.setInt(5, ocorrencia_onibus_codigo);
+			stmt.setString(6, status_ordem);
+		
+			stmt.executeUpdate();
+			stmt.close();
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	public boolean inserirCompostaPor(int cod_ordem, int cod_servico)
+	{
+		try {
+		String query = "insert into COMPOSTA_POR(cod_servico, ordem_servico_num, veiculo_placa) values(?,?,?)";
+		PreparedStatement stmt = con.prepareStatement(query);
+
+		stmt.setInt(1, cod_ordem);
+		stmt.setInt(2, cod_servico);
+		stmt.setString(3, Telas.getInstance().getPlaca());
+		
+		stmt.executeUpdate();
+		
+		stmt.close();
+	}catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+		
+		return true;
+		
+		
+	}
+	
+	public ArrayList<Servico> pegarServicos(int cod)
+	{
+		String query = "select * from composta_por join servico on cod = cod_servico where ordem_servico_num = ?";
+		ArrayList<Servico> servicos = new ArrayList<Servico>();
+	Servico servico;
+			try {
+				
+				PreparedStatement stmt = con.prepareStatement(query);
+				
+				stmt.setInt(1, cod);
+				ResultSet resultado = stmt.executeQuery();
+				
+				while(resultado.next())
+				{
+					servico = new Servico();
+					servico.setCod(resultado.getInt("cod"));
+					servico.setDescricao(resultado.getString("descricao"));
+					servico.setObs(resultado.getString("obs"));
+					servicos.add(servico);
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return servicos;
+		
+	}
+	public int acharCod()
+	{
+		String query = "select max(numero) from ordem_servico";
+		int numero = 0;
+		
+		try {
+			
+			PreparedStatement stmt = con.prepareStatement(query);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while(resultado.next())
+			{
+				numero = resultado.getInt("max(numero)");
+			}
+			
+			
+		}catch(Exception e)
+		{
+			System.out.println("cod erro");
+		}
+		return numero;
+	}
+	
 }
+
+
+	

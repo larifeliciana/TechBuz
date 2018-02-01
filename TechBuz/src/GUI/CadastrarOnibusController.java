@@ -38,7 +38,7 @@ public class CadastrarOnibusController {
     
     @FXML ChoiceBox<String> tipo;
     
-    @FXML
+     @FXML
     void cadatrar() {
 
     	ControlaOnibus onibus = new ControlaOnibus();

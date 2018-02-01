@@ -93,7 +93,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			stmt.setString(9, a.getFone_2());
 			if(jaExiste(4, a.getFone_2()))
 				return "Telefone já em uso";
-			if(!a.getFone_2().matches("[0-9]+"))
+			if(!a.getFone_2().matches("[0-9]+") || !(a.getFone_2().equals("")))
 				return "Telefone inválido";
 			
 
@@ -118,7 +118,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 				stmt.setString(20, cnh);
 			if(jaExiste(4, a.getCnh()))
 				return "CNH já cadastrado";
-			if(!a.getCnh().matches("[0-9]+"))
+			if(!a.getCnh().matches("[0-9]+") && opcode==1)
 				return "CNH inválido";
 			
 			else
@@ -230,7 +230,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 		
 		try
 		{
-			String query = "call retornaFoto(?)";
+			String query = "select foto from funcionario where cpf = ?";
 			PreparedStatement stmt = con.prepareStatement(query);
 
 			stmt.setString(1, cpf);
@@ -467,7 +467,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 					a.setNascimento(resultado.getDate("nascimento"));
 					a.setNome((resultado.getString("nome")));
 					a.setSexo((resultado.getString("sexo")));
-
+					funcionarios.add(a);
 
 				}
 				resultado.close();
