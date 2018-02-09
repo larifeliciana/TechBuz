@@ -1,12 +1,15 @@
 package Interfaces;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import beans.Acessorio;
+import beans.Empresa;
 import beans.Frota;
 import beans.OcorrenciaOnibus;
 import beans.Onibus;
+import beans.OrdemServico;
 import beans.Peca;
 import beans.Servico;
 
@@ -47,6 +50,13 @@ public abstract  interface IRepositorioOnibus {
 	public abstract boolean inserirCompostaPor(int cod_ordem, int cod_servico);
 	public abstract void atualizarFrota( int cod);
 	public abstract void atualizartodas();
-	
+	public abstract ArrayList<OrdemServico> listarOrdens();
+	public abstract ArrayList<OrdemServico> listarOrdensFinalizadas();
+	public abstract ArrayList<Servico> pegarServicos(int cod);
+	public abstract boolean updateOrdem(int ordem, float orcamento, Date data_realizacao, Time inicio, Time fim, String mecanico_chefe);
+	public abstract boolean removerOrdem(int numero);
+	public abstract boolean alterarPeca(String tipo, String nome, String marca, int quantidade, int cod);
+	public abstract ArrayList<Empresa> listaOficinasComContrato(String cnpj);
+	public abstract String acharCnpj(String placa);
 
 }

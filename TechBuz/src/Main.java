@@ -13,20 +13,28 @@ import Repositorio.Teste;
 import beans.Empresa;
 import beans.Endereco;
 import beans.Funcionario;
+import beans.Login;
 import javafx.stage.Stage;
 import negocio.ControlaFuncionario;
 import negocio.ControlaOnibus;
 
-public class Conexao extends Application{
+public class Main extends Application{
 	
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
 		try {
+		
+			Login novo = new Login();
+			novo.setOpcode(0);
+			Telas.getInstance().setLogado(novo);
+			
 			Telas.getInstance().setMainStage(primaryStage);
 			Telas.getMainStage().setTitle("TechBuz");
 			Telas.getMainStage().setResizable(false);
-			Telas.setScene(Telas.getInstance().getTelaInicial());
+			Telas.setScene(Telas.getInstance().getTelaLogin());
+		
 			
 		} catch(Exception e) {
 			e.printStackTrace();

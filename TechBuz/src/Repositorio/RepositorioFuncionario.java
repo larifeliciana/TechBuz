@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.CommunicationsException;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import Interfaces.IRepositorioFuncionario;
 import beans.Empresa;
 import beans.Endereco;
@@ -37,17 +40,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 
 	private RepositorioFuncionario()
 	{
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			//botar conexão
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-
-
-		}
-		catch(Exception e)
-		{
-			System.out.println("erro de classe");
-		}
+		con = Conectar.getInstance().getCon();
 
 	}
 	public String cadastrarFuncionarioBD(Funcionario a, Endereco b, int opcode, String cnh)
@@ -57,7 +50,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 		
 
 
-			String query = "call inserirFuncionario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "call inserirFuncionario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(query);
 
 			stmt.setString(1, a.getCpf());
@@ -80,22 +73,21 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			stmt.setString(5, a.getSexo());
 			stmt.setString(6, a.getFoto());
 			stmt.setString(7, a.getEmail());
-			if(jaExiste(2, a.getEmail()))
-				return "E-mail já em uso";
+
 
 			stmt.setString(8, a.getFone_1());
 			
-			if(jaExiste(3, a.getFone_1()))
-				return "Celular já em uso";
 			if(!a.getFone_1().matches("[0-9]+"))
 					return "Celular inválido";
+//			
 			
 			stmt.setString(9, a.getFone_2());
-			if(jaExiste(4, a.getFone_2()))
-				return "Telefone já em uso";
-			if(!a.getFone_2().matches("[0-9]+") || !(a.getFone_2().equals("")))
-				return "Telefone inválido";
+
 			
+			if(!a.getFone_2().matches("[0-9]+") && !(a.getFone_2().equals("")))
+				return "Telefone inválido";
+			if(a.getFone_2().equals(""))
+				stmt.setString(9,  null);
 
 			stmt.setString(10, a.getAtivo());
 			stmt.setDate(11, a.getData_admissao());
@@ -104,11 +96,11 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			stmt.setString(13, b.getCep());
 			if(!b.getCep().matches("[0-9]+"))
 				return "CEP inválido";
-			
+//			
 			stmt.setString(14, b.getNumero());
 			if(!b.getNumero().matches("[0-9]+"))
 				return "Número inválido";
-			
+//			
 			stmt.setString(15, b.getRua());
 			stmt.setString(16, b.getBairro());
 			stmt.setString(17,  b.getCidade());
@@ -116,21 +108,36 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			stmt.setString(19, b.getComplemento());
 			if(opcode==1)
 				stmt.setString(20, cnh);
-			if(jaExiste(4, a.getCnh()))
-				return "CNH já cadastrado";
+
 			if(!a.getCnh().matches("[0-9]+") && opcode==1)
 				return "CNH inválido";
 			
 			else
 				stmt.setString(20, null);
-			stmt.setInt(21, opcode);
+			
+			stmt.setString(21, "0000");
+			
+			stmt.setInt(22, opcode);
 			stmt.executeUpdate();
 
 			stmt.close(); 
-		}
-		catch(Exception e) {
-			return "erro inserir funcionario";
 			
+			
+		
+		}
+		catch(CommunicationsException e) {
+			e.printStackTrace();
+			return "erro ao se conectar";
+			
+		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException aS)
+		{
+			aS.printStackTrace();
+			return "Um dado já existente ou nulo foi inserido" ;
+		}
+		catch(SQLException x)
+		{
+			
+			return "Erro ao inserir funcionario";
 		}
 
 		return "Funcionário cadastrado";
@@ -164,7 +171,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			resultado.close();
 			stmt.close(); 
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("erro checar");
 			//	return false;
 		}
@@ -213,7 +220,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			resultado.close();
 			stmt.close(); 
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("erro Buscar");
 			//	return false;
 		}
@@ -246,7 +253,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			resultado.close();
 			stmt.close(); 
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("erro Buscar endereco");
 		
 		}
@@ -290,7 +297,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			resultado.close();
 			stmt.close(); 
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("erro Buscar endereco");
 		
 		}
@@ -342,7 +349,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			resultado.close();
 			stmt.close(); 
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("erro Buscar Nome");
 			//	return false;
 		}
@@ -398,7 +405,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			
 		}
 
-		catch(Exception e)
+		catch(SQLException e)
 		{
 			System.out.println("deu erro");
 		}
@@ -474,7 +481,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 				stmt.close(); 
 				
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				System.out.println("opcode errado");
 			}
@@ -535,7 +542,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 				stmt.close(); 
 				
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				System.out.println("opcode errado");
 			}
@@ -568,7 +575,7 @@ public class RepositorioFuncionario  implements IRepositorioFuncionario{
 			stmt.close(); 
 			
 		}
-		catch(Exception e) {
+		catch(SQLException e) {
 			System.out.println("nao deu certo remover");
 			return false;
 		}

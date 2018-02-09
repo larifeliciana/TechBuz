@@ -94,11 +94,9 @@ public class VisualizarFuncionarioController {
     
     @FXML private void initialize()
     {
-    	System.out.println("teste");
     	String cpf = Telas.getInstance().getCpf();
     	this.cpfString = cpf;
     	
-    	System.out.println(cpfString);
     	ControlaFuncionario funcionarios = new ControlaFuncionario();
     	int cargoInt = funcionarios.acharTipo(cpf) ;
     	//System.out.println(cargoInt+"+++");
@@ -132,7 +130,6 @@ public class VisualizarFuncionarioController {
     		this.ativo.setText("Inativo");
     	this.telefone.setText(novo.getFone_2());
     	
-    	System.out.println("3");
     	if(novo.getDisponibilidade().equals("S"))
     		this.disponibilidade.setText("Disponível");
     	else
@@ -144,7 +141,6 @@ public class VisualizarFuncionarioController {
     	this.nascimento.setText(novo.getNascimento().toString());
     	this.celular.setText(novo.getFone_1());
     	
-    	System.out.println(cpf);
     	Endereco endereco = funcionarios.buscaEnderecoFuncionario(cpf);
     	
     	this.cep.setText(endereco.getCep());
@@ -154,7 +150,7 @@ public class VisualizarFuncionarioController {
     	this.complemento.setText(endereco.getComplemento());
     	this.rua.setText(endereco.getRua());
     	this.numero.setText(endereco.getNumero());
-    	this.foto.setImage(funcionarios.pegarFoto(cpf));
+    //	this.foto.setImage(funcionarios.pegarFoto(cpf));
     	//endereco de funcionario
     	
     	
@@ -166,6 +162,15 @@ public class VisualizarFuncionarioController {
     	
     	Stage tela = new Stage();
     	tela.setScene(Telas.getInstance().getTelaOcorrencia());
+    	tela.show();
+    }
+    
+  public  void telaBanco()
+    
+    {
+    	
+    	Stage tela = new Stage();
+    	tela.setScene(Telas.getInstance().getTelaBanco());
     	tela.show();
     }
     

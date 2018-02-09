@@ -30,8 +30,8 @@
      Modena colors
      */
 	-fx-dark-text-color: white; /* Text color when selected*/
-	-fx-mid-text-color: -fx-text-base-color;
-	-fx-light-text-color: -swatch-light-grey;
+	-fx-mid-text-color: white;
+	-fx-light-text-color: white;
 	-fx-body-color: white;
 	/* A bright blue for the focus indicator of objects. Typically used as the
      * first color in -fx-background-color for the "focused" pseudo-class. Also
@@ -328,7 +328,7 @@
 
 .date-picker-popup>*>.spinner>.button>.left-arrow, .date-picker-popup>*>.spinner>.button>.right-arrow
 	{
-	-fx-background-color: white;
+	-fx-background-color: black;
 }
 
 .date-picker-popup>*>.spinner {
@@ -336,7 +336,7 @@
 }
 
 .date-picker-popup>*>.spinner>.label {
-	-fx-text-fill: white;
+	-fx-text-fill: black;
 	-fx-font-weight: bold;
 }
 
@@ -355,6 +355,7 @@
 .date-picker .arrow-button {
 	-fx-background-color: transparent;
 }
+
 
 .date-picker .arrow-button .arrow {
 	-fx-background-insets: -4;
@@ -675,6 +676,10 @@
 .text {
 	-fx-font-smoothing-type: gray;
 }
+.essetexto
+{
+	-fx-text-fill:white;
+}
 
 .text-area, .text-field {
 	-fx-background-color: transparent;
@@ -682,13 +687,13 @@
 	-fx-padding: 0.5em 0.5em 0.5em 0.1em;
 	-fx-border-color: -swatch-grey;
 	-fx-border-width: 0 0 2 0;
-	-fx-prompt-text-fill: derive(-dark, 50.0%);
-	-fx-highlight-fill: rgb(94.0, 203.0, 234.0);
+	-fx-prompt-text-fill: white;
+	-fx-highlight-fill: white;
 }
 
 .text-area .text, .text-field>*>.text {
 	-fx-effect: null;
-	-fx-fill: -dark;
+	-fx-fill: white;
 }
 
 .text-area {

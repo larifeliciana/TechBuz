@@ -53,7 +53,10 @@ public class CadastrarOnibusController {
     	on.setDisponibilidade('S');
     	on.setOperacao("VIAGEM/PÚBLICO");
     	on.setPlaca(placa.getText());
+    	
+   
     	on.setSentado(Integer.valueOf(sentados.getText()));
+    	
     	on.setStatus_alocacao('N');
 //    	
     	on.setTipo(tipo.getValue());

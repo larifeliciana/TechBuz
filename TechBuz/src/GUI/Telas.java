@@ -1,5 +1,7 @@
 package GUI;
 
+import beans.Login;
+import beans.Viagem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,10 +9,12 @@ import javafx.stage.Stage;
 public class Telas {
 
 	private Scene telaInicial;
+	private Scene telaFiscal;
+	
 	private String cpf;
 	private String placa;
 	private int codigo;
-
+	private Viagem viagem;
 	private Scene telaEmpresas;
 
 
@@ -21,25 +25,52 @@ public class Telas {
 	private Scene telaOcorrencia;
 	private Scene telaAdicionarOcorrencia;
 	private Scene telaAfastamento;
-
+	private Scene telaBanco;
+	
 	private Scene telaOnibus;
 	private Scene telaCadastrarOnibus;
 	private Scene telaVistorias;
 	private Scene telaDocumentos;
 	private Scene telaVencimentos;	
 	private Scene telaGerarOrdem;
+	private Scene telaFinalizarOrdem;
 	
 	private Scene telaLinhas;
+	
+	private Scene telaLogin;
 
+	private Scene telaViagem;
+	private Scene telaChecarViagem;
+	private Scene telaFinalizarViagem;
+	private Scene telaAlterarViagem;
+	
 
 	private static Stage mainStage;
 
 	private static Telas instance;
 
+	private Login logado;
+	private int ordem;
+	
 	private Telas() {
 
 	}
 
+	public void escolheTela(Login logar)
+	{
+		if(logar.getOpcode()==4)
+		{
+		this.setScene(this.getTelaInicial());	
+		}
+		if(logar.getOpcode()==3)
+		{
+		this.setScene(this.getTelaInicial());	
+		}
+		
+		
+		
+		
+	}
 
 	public Scene getTelaOnibus() {
 
@@ -53,6 +84,116 @@ public class Telas {
 		}
 
 		return telaOnibus;
+	}
+
+	
+	public Scene getTelaViagem() {
+
+		try {
+			 { // Repare no IF.
+				telaViagem = new Scene(FXMLLoader.load(getClass().getResource("telaviagem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaViagem;
+	}
+	
+	
+	public Scene getTelaChecarViagem() {
+
+		try {
+			 { // Repare no IF.
+				telaChecarViagem = new Scene(FXMLLoader.load(getClass().getResource("telachecarviagem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaChecarViagem;
+	}
+	
+	
+	public Scene getTelaFinalizarViagem() {
+
+		try {
+			 { // Repare no IF.
+				telaFinalizarViagem = new Scene(FXMLLoader.load(getClass().getResource("telafinalizarviagem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaFinalizarViagem;
+	}
+	
+	public Scene getTelaAlterarViagem() {
+
+		try {
+			 { // Repare no IF.
+				telaAlterarViagem = new Scene(FXMLLoader.load(getClass().getResource("telaalterarviagem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaAlterarViagem;
+	}
+	
+	public int getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(int ordem) {
+		this.ordem = ordem;
+	}
+
+	public Scene getTelaFinalizarOrdem() {
+
+		try {
+			 { // Repare no IF.
+				telaFinalizarOrdem = new Scene(FXMLLoader.load(getClass().getResource("telafinalizarordem.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaFinalizarOrdem;
+	}
+
+	public Scene getTelaBanco() {
+
+		try {
+			 { // Repare no IF.
+				telaBanco = new Scene(FXMLLoader.load(getClass().getResource("telabancohoras.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaBanco;
+	}
+
+	
+	public Scene getTelaLogin() {
+
+		try {
+			 { // Repare no IF.
+				telaLogin = new Scene(FXMLLoader.load(getClass().getResource("telalogin.fxml")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROOOOO");
+		}
+
+		return telaLogin;
 	}
 	
 
@@ -256,16 +397,23 @@ public class Telas {
 	public Scene getTelaInicial() {
 
 		try {
-			if (telaInicial == null) { // Repare no IF.
+			if (this.logado.getOpcode()==4) { // Repare no IF.
 				telaInicial = new Scene(FXMLLoader.load(getClass().getResource("telainicial.fxml")));
 			}
+		
+			else if(this.logado.getOpcode() ==3)
+			{
+				telaInicial = new Scene(FXMLLoader.load(getClass().getResource("telainicialFiscal.fxml")));
+			}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROOOOO");
 		}
 		return telaInicial;
 	}
-
+	
+	
 	public Scene getTelaFuncionarios() {
 		try {
 			{ // Repare no IF.
@@ -303,4 +451,29 @@ public class Telas {
 		return telaEmpresas;
 	}
 
+
+	
+	
+	
+	public Viagem getViagem() {
+		return viagem;
+	}
+
+	public void setViagem(Viagem viagem) {
+		this.viagem = viagem;
+	}
+
+	public Login getLogado() {
+		return logado;
+	}
+	
+	
+
+
+	public void setLogado(Login logado) {
+		this.logado = logado;
+	}
+
+	
+	
 }

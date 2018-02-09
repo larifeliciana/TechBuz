@@ -47,6 +47,12 @@ public class Linha {
 	public void setPonto_inicial(String ponto_inicial) {
 		this.ponto_inicial = ponto_inicial;
 	}
+
+	@Override
+	public String toString() {
+		return "numero=" + numero + ", nome=" + nome + ", tarifa_cod=" + tarifa_cod + ", ponto_inicial="
+				+ ponto_inicial ;
+	}
 	
 		
 }

@@ -29,6 +29,11 @@ public class InicialController {
 		Telas.setScene(Telas.getInstance().getTelaLinhas());
 	}
 	
+	@FXML public void telaViagem()
+	{
+		Telas.setScene(Telas.getInstance().getTelaViagem());
+	}
+	
 	
 	
 }

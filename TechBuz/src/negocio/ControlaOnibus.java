@@ -1,14 +1,17 @@
 package negocio;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import Interfaces.IRepositorioOnibus;
 import Repositorio.RepositorioOnibus;
 import beans.Acessorio;
+import beans.Empresa;
 import beans.Frota;
 import beans.OcorrenciaOnibus;
 import beans.Onibus;
+import beans.OrdemServico;
 import beans.Peca;
 import beans.Servico;
 
@@ -125,6 +128,11 @@ public class ControlaOnibus {
 	{
 		return onibus.removerPeca(cod);
 	}
+	public boolean alterarPeca(String tipo, String nome, String marca, int quantidade, int cod)
+	{
+		return onibus.alterarPeca(tipo, nome, marca, quantidade, cod);
+	}
+	
 	public  Peca buscarPeca(int cod)
 	{
 		return onibus.buscarPeca(cod);
@@ -143,12 +151,24 @@ public class ControlaOnibus {
 		return onibus.removerDaFrota(placa);
 	}
 	
+	public ArrayList<Empresa> listaOficinasComContrato(String cnpj){
+		return onibus.listaOficinasComContrato(cnpj);
+	}
+	
 
+	public ArrayList<Servico> pegarServicos(int cod)
+	{
+		return onibus.pegarServicos(cod);
+	}
 	public ArrayList<Servico> listarServicos()
 	{
 		return onibus.listarServicos();
 	}
-	
+	public String acharCnpj(String placa)
+
+	{
+		return onibus.acharCnpj(placa);
+	}
 	public int acharCod()
 	{
 		return onibus.acharCod();
@@ -172,6 +192,25 @@ public class ControlaOnibus {
 	public void atualizartodas()
 	{
 		onibus.atualizartodas();
+	}
+	
+	public  ArrayList<OrdemServico> listarOrdens()
+	{
+		return onibus.listarOrdens();
+	}
+	public  ArrayList<OrdemServico> listarOrdensFinalizadas()
+	{
+		return onibus.listarOrdensFinalizadas();
+	}
+	
+	public boolean updateOrdem(int ordem, float orcamento, Date data_realizacao, Time inicio, Time fim, String mecanico_chefe)
+	{
+		return onibus.updateOrdem(ordem, orcamento, data_realizacao, inicio, fim, mecanico_chefe);
+	}
+	
+	public boolean removerOrdem(int numero)
+	{
+		return onibus.removerOrdem(numero);
 	}
 }
 

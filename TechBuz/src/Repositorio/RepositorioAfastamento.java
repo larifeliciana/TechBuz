@@ -1,5 +1,6 @@
 package Repositorio;
 
+import Repositorio.Conectar;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,17 +36,7 @@ public class RepositorioAfastamento implements IRepositorioAfastamento{
 
 	private RepositorioAfastamento()
 	{
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			//botar conexão
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-
-
-		}
-		catch(Exception e)
-		{
-			System.out.println("erro de classe");
-		}
+		con = Conectar.getInstance().getCon();
 
 	}
 

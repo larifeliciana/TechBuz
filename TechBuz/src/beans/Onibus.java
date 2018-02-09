@@ -127,9 +127,9 @@ public class Onibus {
 
 	@Override
 	public String toString() {
-		return "Onibus [placa=" + placa + ", tipo=" + tipo + ", operacao=" + operacao + ", data_inclusao="
+		return "placa=" + placa + ", tipo=" + tipo + ", operacao=" + operacao + ", data_inclusao="
 				+ data_inclusao + ", disponibilidade=" + disponibilidade + ", status_alocacao=" + status_alocacao
-				+ ", sentado=" + sentado + ", cod_frota=" + cod_frota + ", ano=" + ano + "]";
+				+ ", sentado=" + sentado + ", cod_frota=" + cod_frota + ", ano=" + ano ;
 	}
 	
 	//#getters and setters

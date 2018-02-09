@@ -34,18 +34,7 @@ public class RepositorioBancoDeHoras implements IRepositorioBancoDeHoras {
 
 	private RepositorioBancoDeHoras()
 	{
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			//botar conexão
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-
-
-		}
-		catch(Exception e)
-		{
-			System.out.println("erro de classe");
-		}
-
+		con = Conectar.getInstance().getCon();
 	}
 
 	
@@ -237,6 +226,37 @@ public class RepositorioBancoDeHoras implements IRepositorioBancoDeHoras {
 		return banco;
 		
 	}
+	
+	public int calcular(Date inicio, Date fim, String cpf)
+	{
+		String query = "select(retornarTotalHoras(?,?, ?))";
+		
+		int a = -1;
+		try {
+		PreparedStatement stmt = con.prepareStatement(query);
+
+		stmt.setDate(1, inicio);
+		stmt.setDate(2, fim);
+		stmt.setString(3, cpf);
+
+		ResultSet resultado  = stmt.executeQuery();
+
+		while(resultado.next())
+		{
+			
+			a = resultado.getInt(1);
+			}
+		resultado.close();
+		stmt.close();
+	
+	}catch(Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+	return a;
+	
+}
 	
 }
 

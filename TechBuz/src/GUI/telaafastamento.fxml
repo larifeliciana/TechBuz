@@ -15,10 +15,10 @@
             <Label layoutX="21.0" layoutY="25.0" text="Funcionário:" />
             <Label fx:id="nome" layoutX="272.0" layoutY="24.0" text="Jose Fino" />
             <Label fx:id="cpf" layoutX="150.0" layoutY="25.0" text="70283919493" />
-            <DatePicker fx:id="inicio" layoutX="401.0" layoutY="138.0" />
-            <DatePicker fx:id="fim" layoutX="401.0" layoutY="211.0" />
+            <DatePicker fx:id="inicio" layoutX="401.0" layoutY="138.0" stylesheets="@teste1.css" />
+            <DatePicker fx:id="fim" layoutX="401.0" layoutY="211.0" stylesheets="@teste1.css" />
             <Label layoutX="401.0" layoutY="186.0" text="Fim:" />
-            <TableView fx:id="tabela" layoutX="50.0" layoutY="100.0" prefHeight="274.0" prefWidth="314.0">
+            <TableView fx:id="tabela" layoutX="50.0" layoutY="100.0" prefHeight="274.0" prefWidth="314.0" stylesheets="@teste1.css">
               <columns>
                 <TableColumn fx:id="colunaInicio" prefWidth="103.0" text="Inicio" />
                 <TableColumn fx:id="colunaFim" prefWidth="96.0" text="Fim" />

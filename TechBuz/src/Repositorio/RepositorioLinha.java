@@ -33,17 +33,7 @@ public class RepositorioLinha implements IRepositorioLinha{
 
 	private RepositorioLinha()
 	{
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			//botar conexão
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-
-
-		}
-		catch(Exception e)
-		{
-			System.out.println("erro de classe");
-		}
+		con = Conectar.getInstance().getCon();
 
 	}
 

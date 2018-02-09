@@ -6,13 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="453.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="453.0" stylesheets="@teste.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
    <children>
       <Label layoutX="81.0" layoutY="123.0" styleClass="labelTitulo" stylesheets="@teste1.css" text="Usuário:" />
       <Label layoutX="84.0" layoutY="222.0" styleClass="labelTitulo" stylesheets="@teste1.css" text="Senha:" />
-      <TextField layoutX="201.0" layoutY="115.0" stylesheets="@teste1.css" />
-      <PasswordField layoutX="198.0" layoutY="218.0" stylesheets="@teste1.css" />
-      <Button layoutX="247.0" layoutY="278.0" mnemonicParsing="false" text="Button" />
+      <TextField fx:id="login_cpf" layoutX="201.0" layoutY="115.0" stylesheets="@teste1.css" />
+      <PasswordField fx:id="senha" layoutX="198.0" layoutY="218.0" stylesheets="@teste1.css" />
+      <Button layoutX="247.0" layoutY="278.0" mnemonicParsing="false" onAction="#logar" text="Entrar" />
+      <Label fx:id="msg" layoutX="198.0" layoutY="35.0" stylesheets="@teste1.css" />
    </children>
 </AnchorPane>

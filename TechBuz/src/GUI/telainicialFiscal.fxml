@@ -11,7 +11,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="315.0" layoutY="313.0" mnemonicParsing="false" prefHeight="165.0" prefWidth="276.0" styleClass="botaoMaior" text="Viagens" />
+      <Button layoutX="315.0" layoutY="313.0" mnemonicParsing="false" onAction="#telaViagem" prefHeight="165.0" prefWidth="276.0" styleClass="botaoMaior" text="Viagens" />
       <Button layoutX="818.0" layoutY="97.0" mnemonicParsing="false" onAction="#telaLinhas" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Linhas" />
       <Button layoutX="817.0" layoutY="317.0" mnemonicParsing="false" prefHeight="158.0" prefWidth="276.0" styleClass="botaoMaior" text="Clientes" />
    </children>

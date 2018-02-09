@@ -40,6 +40,11 @@ public class LinhaController {
     @FXML
     private TableColumn<Trajeto, String> cidade;
 
+    @FXML 
+    private void voltar()
+    {
+    		Telas.setScene(Telas.getInstance().getTelaInicial());
+    }
 
     ControlaLinha linhasC = new ControlaLinha();
     

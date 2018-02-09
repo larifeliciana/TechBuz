@@ -29,16 +29,7 @@ public class RepositorioEmpresa implements IRepositorioEmpresa {
 	
 	private RepositorioEmpresa()
 	{
-		try{
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/techbuz","root","");
-		
-		System.out.println("teste111");
-		}
-		catch(Exception e)
-		{
-			System.out.println("deu ruim");
-		}
+		con = Conectar.getInstance().getCon();
 	}
 	
 	public String cadastrarEmpresaBD(Empresa a,Endereco b, int opcode)

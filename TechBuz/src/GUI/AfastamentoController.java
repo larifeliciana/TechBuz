@@ -102,6 +102,9 @@ public class AfastamentoController {
 		
 		msg.setText(afastamentos.cadastrarAfastamento(novo));
 		
+
+		ObservableList listat = FXCollections.observableArrayList(afastamentos.listarAfastamentoFuncionario(cpfString));
+		tabela.setItems(listat);
 		
 		
 

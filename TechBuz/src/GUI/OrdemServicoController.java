@@ -9,6 +9,7 @@ import beans.Funcionario;
 import beans.Servico;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -18,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import negocio.ControlaEmpresa;
 import negocio.ControlaFuncionario;
 import negocio.ControlaOnibus;
@@ -33,7 +35,7 @@ public class OrdemServicoController {
 	@FXML
 	private ChoiceBox<Empresa> oficina;
 
-	// @FXML private Label placa;
+	private String placa;
 
 	@FXML
 	private ChoiceBox<String> status;
@@ -56,6 +58,7 @@ public class OrdemServicoController {
 
 	@FXML void initialize()
 	{
+		placa = Telas.getInstance().getPlaca();
 		//
 		//    	coluna.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		//    	obs.setCellValueFactory(new PropertyValueFactory<>("obs"));
@@ -78,17 +81,27 @@ public class OrdemServicoController {
 		ObservableList lista = FXCollections.observableArrayList(funcionarios.retornarAtivosGerente());
 		//    
 		gerente.setItems(lista);
+		//placa x achar empresa x todasoficinas(cnpj);    	
+		//ObservableList lista1 = FXCollections.observableArrayList(empresas.todasEmpresasOficina());
 		//    	
-		ObservableList lista1 = FXCollections.observableArrayList(empresas.todasEmpresasOficina());
-		//    	
-		oficina.setItems(lista1);
+		//oficina.setItems(lista1);
 		//    
 		//
-		ObservableList lista3 = FXCollections.observableArrayList("Em Avaliação", "Solicitado", "Concluído");
+		
+		carregarOficinas();
+		
+				ObservableList lista3 = FXCollections.observableArrayList("Em Avaliação", "Solicitado", "Concluído");
 		this.status.setItems(lista3);
 		//    	
 	}	
 	//
+	
+	@FXML void carregarOficinas()
+	{
+		ObservableList lista1 = FXCollections.observableArrayList(onibus.listaOficinasComContrato(onibus.acharCnpj(placa)));
+		oficina.setItems(lista1);
+		
+	}
 	@FXML void gerar()
 	{
 

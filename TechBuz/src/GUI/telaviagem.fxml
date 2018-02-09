@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ViagensController">
+   <children>
+      <Label layoutX="719.0" layoutY="97.0" text="Placa:" />
+      <Label layoutX="719.0" layoutY="158.0" text="Linha:" />
+      <Label layoutX="999.0" layoutY="101.0" text="Data/Hora:" />
+      <TableView fx:id="viagens" layoutX="26.0" layoutY="64.0" prefHeight="523.0" prefWidth="641.0">
+        <columns>
+          <TableColumn fx:id="colunaOnibus" prefWidth="75.0" text="Ônibus" />
+          <TableColumn fx:id="colunaLinha" prefWidth="75.0" text="Linha" />
+            <TableColumn fx:id="colunaMotorista" prefWidth="154.0" text="Motorista" />
+            <TableColumn fx:id="colunaCobrador" prefWidth="152.0" text="Cobrador" />
+            <TableColumn fx:id="colunaHorario" prefWidth="125.0" text="Horário" />
+            <TableColumn fx:id="status" prefWidth="178.0" text="Column X" />
+        </columns>
+      </TableView>
+      <Label layoutX="238.0" layoutY="24.0" text="Viagens prevista para data:" />
+      <DatePicker fx:id="data" layoutX="408.0" layoutY="20.0" onAction="#atualizarTabela" />
+      <Label layoutX="1002.0" layoutY="162.0" text="Motorista:" />
+      <Label layoutX="719.0" layoutY="235.0" text="Cobrador:" />
+      <Button fx:id="finalizar" layoutX="101.0" layoutY="596.0" mnemonicParsing="false" onAction="#finalizar" text="Finalizar Viagem" />
+      <Button fx:id="remover" layoutX="309.0" layoutY="596.0" mnemonicParsing="false" onAction="#remover" text="Remover Viagem" />
+      <Button fx:id="alterar" layoutX="528.0" layoutY="596.0" mnemonicParsing="false" onAction="#alterar" prefHeight="25.0" prefWidth="107.0" text="Alterar/Visualizar Viagem" />
+      <Button fx:id="cadastrar" layoutX="1104.0" layoutY="231.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar Viagem" />
+      <Button layoutX="1023.0" layoutY="571.0" mnemonicParsing="false" text="Gerar Relatório (Semana)" />
+      <DatePicker layoutX="719.0" layoutY="460.0" />
+      <DatePicker layoutX="719.0" layoutY="509.0" />
+      <Button layoutX="722.0" layoutY="571.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Gerar Relatório (Datas)" />
+      <ChoiceBox fx:id="placa" layoutX="821.0" layoutY="93.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="linha" layoutX="821.0" layoutY="154.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="motorista" layoutX="1106.0" layoutY="158.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="cobrador" layoutX="822.0" layoutY="234.0" prefWidth="150.0" />
+      <Button layoutX="1023.0" layoutY="497.0" mnemonicParsing="false" onAction="#telaChecar" prefHeight="25.0" prefWidth="149.0" text="Checar Viagem" />
+      <TextField fx:id="data_hora" layoutX="1107.0" layoutY="93.0" />
+      <Button layoutX="25.0" layoutY="20.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+      <Button layoutX="94.0" layoutY="20.0" mnemonicParsing="false" onAction="#atualizarTabela" text="Atualizar" />
+   </children>
+</AnchorPane>
